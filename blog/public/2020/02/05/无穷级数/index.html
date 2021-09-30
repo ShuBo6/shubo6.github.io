@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一、讨论等比级数（也称几何级数）$$\sum_{i&#x3D;1}^{\infty} aq^{n-1} &#x3D;a+aq+aq^2+…+aq^n-1+…\$$的敛散性，其中$$a$$ $$\not&#x3D;$$ $$0,q$$是级数的公比 解：$$S_n&#x3D;a+aq+aq^2+…+aq^n-1\&#x3D;\begin{cases} na&amp; \text{q&#x3D;1}\\ \frac{a(1-q^{n-1})}{1-q}&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无穷级数笔记">
+<meta property="og:url" content="https://shubo6.github.io/2020/02/05/%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0/index.html">
+<meta property="og:site_name" content="王树波的博客">
+<meta property="og:description" content="一、讨论等比级数（也称几何级数）$$\sum_{i&#x3D;1}^{\infty} aq^{n-1} &#x3D;a+aq+aq^2+…+aq^n-1+…\$$的敛散性，其中$$a$$ $$\not&#x3D;$$ $$0,q$$是级数的公比 解：$$S_n&#x3D;a+aq+aq^2+…+aq^n-1\&#x3D;\begin{cases} na&amp; \text{q&#x3D;1}\\ \frac{a(1-q^{n-1})}{1-q}&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-05T07:34:29.000Z">
+<meta property="article:modified_time" content="2020-05-01T05:51:05.000Z">
+<meta property="article:author" content="王树波">
+<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="专升本">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shubo6.github.io/2020/02/05/%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>无穷级数笔记 | 王树波的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王树波的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/02/05/%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王树波">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王树波的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          无穷级数笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-05 15:34:29" itemprop="dateCreated datePublished" datetime="2020-02-05T15:34:29+08:00">2020-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-01 13:51:05" itemprop="dateModified" datetime="2020-05-01T13:51:05+08:00">2020-05-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、讨论等比级数（也称几何级数）"><a href="#一、讨论等比级数（也称几何级数）" class="headerlink" title="一、讨论等比级数（也称几何级数）"></a>一、讨论等比级数（也称几何级数）</h1><p>$$\sum_{i=1}^{\infty} aq^{n-1} =a+aq+aq^2+…+aq^n-1+…\$$<br>的敛散性，其中$$a$$ $$\not=$$ $$0,q$$是级数的公比<br><br></p>
+<p>解：<br><br><br>$$<br>S_n=a+aq+aq^2+…+aq^n-1\<br>=\begin{cases}</p>
+<p>na&amp; \text{q=1}\\</p>
+<p>\frac{a(1-q^{n-1})}{1-q}&amp; \text{q!=1}</p>
+<p>\end{cases}<br>$$</p>
+<br>
+
+<p>$$<br>\lim_{x\rightarrow\infty} Sn=<br>\begin{cases}</p>
+<p>\lim_{x\rightarrow\infty} a_n=\infty&amp; \text{q=1}\\</p>
+<p>\lim_{x\rightarrow\infty} \frac{a(1-q^{n})}{1-q}&amp; \text{q!=1}</p>
+<p>\end{cases}<br>$$<br><br><br>综上：<br><br></p>
+<p>$$|q|&lt;1时,\lim_{x\rightarrow\infty} Sn=\frac{a}{1-q}\$$<br>$$|q|\geq1时,\lim_{x\rightarrow\infty} Sn不存在\$$</p>
+<p>结论：</p>
+<p>$$当|q|&lt;1时,\sum_{i=1}^{\infty} aq^{n-1}=\frac{a}{1-q}，\$$<br>$$当|q|\geq1时,\sum_{i=1}^{\infty} aq^{n-1}发散。<br>$$</p>
+<h1 id="二、P——级数"><a href="#二、P——级数" class="headerlink" title="二、P——级数"></a>二、P——级数</h1><p>$$<br>P——级数：<br>\sum_{i=1}^{\infty} \frac{1}{n^P}<br>=\begin{cases}</p>
+<p>收敛&amp; \text{P&gt;1时}\\</p>
+<p>发散&amp; \text{P&lt;=1时}</p>
+<p>\end{cases}<br>$$</p>
+<h2 id="调和级数（发散）"><a href="#调和级数（发散）" class="headerlink" title="调和级数（发散）"></a>调和级数（发散）</h2><p>当P——级数中P=1时，称为调和级数<br>$$\sum_{i=1}^{\infty} \frac{1}{n}=1+\frac{1}{2}+\frac{1}{3}+…+\frac{1}{n}+…$$</p>
+<h1 id="三、级数相加的敛散性变化"><a href="#三、级数相加的敛散性变化" class="headerlink" title="三、级数相加的敛散性变化"></a>三、级数相加的敛散性变化</h1><p>$$1.若\sum_{i=1}^{\infty}u_n收敛，而\sum_{i=1}^{\infty}v_n发散，\则\sum_{i=1}^{\infty}（u_n+v_n）发散$$</p>
+<p>$$2.若\sum_{i=1}^{\infty}u_n，\sum_{i=1}^{\infty}v_n都收敛，\则\sum_{i=1}^{\infty}（u_n+v_n）收敛$$</p>
+<p>$$3.若\sum_{i=1}^{\infty}u_n，\sum_{i=1}^{\infty}v_n都发散，\则\sum_{i=1}^{\infty}（u_n+v_n）有可能收敛$$</p>
+<h1 id="四、正项级数"><a href="#四、正项级数" class="headerlink" title="四、正项级数"></a>四、正项级数</h1><p>$$若u_n&gt;0,n=1,2,3…,则称\sum_{i=1}^{\infty}u_n为正项级数$$</p>
+<h2 id="正项级数的敛散性判别法"><a href="#正项级数的敛散性判别法" class="headerlink" title="正项级数的敛散性判别法"></a>正项级数的敛散性判别法</h2><h3 id="1-定义法："><a href="#1-定义法：" class="headerlink" title="1.定义法："></a>1.定义法：</h3><p>$$若正项级数\sum_{i=1}^{\infty}u_n收敛\longleftrightarrow \lim_{x\rightarrow\infty} S_n=s$$</p>
+<h3 id="2-基本定理法："><a href="#2-基本定理法：" class="headerlink" title="2.基本定理法："></a>2.基本定理法：</h3><p>$$若正项级数\sum_{i=1}^{\infty}u_n的前n项和数列{S_n}有上界，\则\sum_{i=1}^{\infty}u_n收敛。$$</p>
+<h3 id="3-正项级数比较审敛法："><a href="#3-正项级数比较审敛法：" class="headerlink" title="3.正项级数比较审敛法："></a>3.正项级数比较审敛法：</h3><h4 id="Th1-（比较审敛法）"><a href="#Th1-（比较审敛法）" class="headerlink" title="Th1:（比较审敛法）"></a>Th1:（比较审敛法）</h4><p>$$设正项级数\sum_{i=1}^{\infty}u_n和\sum_{i=1}^{\infty}v_n$$</p>
+<p>$$（1）若u_n\leq v_n(n=1,2,…)且\sum_{i=1}^{\infty}v_n收敛，\则\longrightarrow \sum_{i=1}^{\infty}u_n收敛$$</p>
+<p>证明：</p>
+<p>$$\because \sum_{i=1}^{\infty}v_n 收敛 \longrightarrow \lim_{x\rightarrow\infty} S_n^{(1)}=s \longrightarrow {S_n^{(1)}} 有界 $$</p>
+<p>$$即\exists M&gt;0,\forall n \in N^*,有0&lt;S_n^{(1)}&lt;M$$</p>
+<p>$$S_n^{(2)}=u_1+u_2+…+u_n\leq \v_1+v_2+…+v_n=S_n^{(1)}\leq M$$<br>$$\therefore 由2.基本定理知\sum_{i=1}^{\infty}u_n收敛$$</p>
+<p>$$（2）若u_n\geq v_n(n=1,2,…)且\sum_{i=1}^{\infty}v_n发散，\则\longrightarrow \sum_{i=1}^{\infty}u_n发散$$</p>
+<h4 id="Th2-比较审敛法的极限形式"><a href="#Th2-比较审敛法的极限形式" class="headerlink" title="Th2:比较审敛法的极限形式"></a>Th2:比较审敛法的极限形式</h4><p>$$设正项级数\sum_{i=1}^{\infty}u_n和\sum_{i=1}^{\infty}v_n，且\lim_{n\to\infty} \frac{u_n}{v_n}=l$$<br>$$(1)0&lt;l&lt;+\infty时,则\sum_{i=1}^{\infty}u_n和\sum_{i=1}^{\infty}v_n\具有相同的敛散性。$$<br>$$(2)l=0时,若\sum_{i=1}^{\infty}u_n收敛，则\sum_{i=1}^{\infty}v_n收敛$$<br>$$(3)l=+\infty时,若\sum_{i=1}^{\infty}u_n发散，则\sum_{i=1}^{\infty}v_n发散$$<br>以上“比较审敛法的极限形式”的方法需要自行构造合适的$v_n$以求$u_n$敛散性</p>
+<h4 id="Th3-（比值审敛法）"><a href="#Th3-（比值审敛法）" class="headerlink" title="Th3:（比值审敛法）"></a>Th3:（比值审敛法）</h4><p>$$正项级数\sum_{i=1}^{\infty}u_n,若p=\lim_{n\to\infty} \frac{u_{n+1}}{u_n},则$$<br>$$(1)0\leq p&lt;1时,则\sum_{i=1}^{\infty}u_n收敛$$<br>$$(2)p&gt;1时,则\sum_{i=1}^{\infty}u_n发散$$<br>$$(3)p=1时,可能收敛，可能发散$$</p>
+<blockquote>
+<p>一般情况用比值审敛法来求带阶乘级数的敛散性</p>
+</blockquote>
+<h4 id="Th4-根植审敛法"><a href="#Th4-根植审敛法" class="headerlink" title="Th4:(根植审敛法)"></a>Th4:(根植审敛法)</h4><p>$$正项级数\sum_{i=1}^{\infty}u_n,若p=\lim_{n\to\infty} \sqrt[n]{u_n},则$$<br>$$(1)0\leq p&lt;1时,则\sum_{i=1}^{\infty}u_n收敛$$<br>$$(2)p&gt;1时,则\sum_{i=1}^{\infty}u_n发散$$<br>$$(3)p=1时,可能收敛，可能发散$$<br>$$根值审敛法一般用于求带u_n=\frac{\alpha^n}{n^s}的这种形式$$</p>
+<h1 id="五、交错级数"><a href="#五、交错级数" class="headerlink" title="五、交错级数"></a>五、交错级数</h1><p>$$定义：若u_n&gt;0,\称\sum_{i=1}^{\infty}(-1)^nu_n或\sum_{i=1}^{\infty}(-1)^{n-1}u_n为交错级数$$</p>
+<h2 id="莱布尼兹判别法："><a href="#莱布尼兹判别法：" class="headerlink" title="莱布尼兹判别法："></a>莱布尼兹判别法：</h2><p>$$若交错级数满足：\<br>(1){u_n}单调减少\<br>(2)\lim_{n\to\infty} u_n= 0\<br>则该交错级数收敛<br>$$</p>
+<h2 id="绝对收敛和条件收敛"><a href="#绝对收敛和条件收敛" class="headerlink" title="绝对收敛和条件收敛"></a>绝对收敛和条件收敛</h2><p>$$<br>定义：若|u_n|收敛，则称\sum_{i=1}^{\infty}u_n绝对收敛\<br>若\sum_{i=1}^{\infty}u_n收敛，但\sum_{i=1}^{\infty}|u_n|发散，\则称为条件收敛\</p>
+<p>\star 绝对收敛的级数必定收敛<br>$$</p>
+<h1 id="六、幂级数（函数项级数）："><a href="#六、幂级数（函数项级数）：" class="headerlink" title="六、幂级数（函数项级数）："></a>六、幂级数（函数项级数）：</h1><p>$${u_n(x)}函数列\\sum_{i=1}^{\infty}u_n(x)=u_1(x)+u_2(x)+…+u_n(x)+…$$</p>
+<h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>$$(1)\forall x_0\in D 若\sum_{i=1}^{\infty}u_n(x_0)收敛，\<br>则称x_0为函数项级数\sum_{i=1}^{\infty}u_n(x)的收敛点，\<br>否则x_0为\sum_{i=1}^{\infty}u_n(x)的发散点。\<br>(2)收敛域：\所有收敛点的集合称为函数项级数\\sum_{i=1}^{\infty}u_n(x)的收敛域。<br>$$</p>
+<h2 id="不缺项幂函数收敛域、收敛区间求法："><a href="#不缺项幂函数收敛域、收敛区间求法：" class="headerlink" title="不缺项幂函数收敛域、收敛区间求法："></a>不缺项幂函数收敛域、收敛区间求法：</h2><p>$$\sum_{n=0}^{\infty}a_n(x-x_n)^n$$<br>$$记作：\a_0+a_1(x-x_0)+a_2(x-x_0)^2+…+a_n(x-x_0)^n+…$$<br>$$\star \sum_{n=0}^{\infty}a_nx^n=a_0+a_1x+a_2x^2+…+a_nx^n+…$$</p>
+<p>$$Th:如果\lim_{n\to\infty} |\frac{a_{n+1}}{a_n}|= l\<br>其中a_n,a_{n+1}是幂级数\\sum_{n=0}^{\infty}a_nx^n相邻两项的系数，\则此幂级数的收敛半径为R\<br>\<br>\</p>
+<p>R<br>=\begin{cases}</p>
+<p>\frac{1}{l}&amp; \text{l!=0}\</p>
+<p>\infty&amp; \text{l=0}\</p>
+<p>0&amp; \text{l=∞}<br>\end{cases}</p>
+<p>\<br>\sum_{n=0}^{\infty}a_nx^n在(-R,R)内收敛。\<br>收敛域则通过带入验证，收敛域可能为：\<br>[-R,R],[-R,R),(-R,R),(-R,R]</p>
+<p>$$</p>
+<h2 id="缺项的幂函数收敛域、收敛区间求法："><a href="#缺项的幂函数收敛域、收敛区间求法：" class="headerlink" title="缺项的幂函数收敛域、收敛区间求法："></a>缺项的幂函数收敛域、收敛区间求法：</h2><p>$$\sum_{n=0}^{\infty}a_nx^{2n}和\sum_{n=0}^{\infty}a_nx^{2n+1}\<br>p=\lim_{n\to\infty} |\frac{u_{n+1}(x)}{u_{n}(x)}|\= \lim_{n\to\infty} |\frac{a_{n+1}x^{2n+2}}{a_{n}x^{2n}}|\\=\lim_{n\to\infty} |\frac{a_{n+1}}{a_{n+1}}x^2|&lt;1\<br>x^2&lt;\frac{1}{l},\<br>R=\frac{1}{l}=\frac{1}{\sqrt{l}}<br>收敛区间（-R,R）,\<br>收敛域，同不缺项的幂级数求法相同。<br>$$</p>
+<h1 id="幂级数和函数的性质"><a href="#幂级数和函数的性质" class="headerlink" title="幂级数和函数的性质"></a>幂级数和函数的性质</h1><p>$$\sum_{n=0}^{\infty}a_nx^n=s(x)\<br>x\in收敛域，收敛半径为R\<br>$$</p>
+<h2 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h2><p>$$（1）和函数s(x)在(-R,R)内连续\<br>(2)逐项积分：\int_0^x s(t)dt\<br>=\int_0^x \sum_{n=0}^{\infty}a_nt^n dt\<br>=\sum_{n=0}^{\infty}\int_0^x a_nt^n dt\<br>=\sum_{n=0}^{\infty}a_n\frac{x^{n+1}}{n+1}\<br>(3)逐项求导：s(x)在(-R,R)内可导，逐项都可导\<br>即s’(x)=\int_0^x s(t)dt\<br>=(\sum_{n=1}^{\infty} a_nx^n)’\<br>=\sum_{n=1}^{\infty}(a_nx^n)’\<br>=\sum_{n=1}^{\infty}na_nx^{n-1}<br>$$</p>
+<h1 id="幂级数-和函数的求法"><a href="#幂级数-和函数的求法" class="headerlink" title="幂级数 和函数的求法"></a>幂级数 和函数的求法</h1><p>$$<br>（1）当幂级数的一般项形式\<br>如\frac{x^n}{n(n+1)}时，\<br>可先用求导后求积分的方法求其和函数。\<br>(2)当幂级数的一般项形式如\<br>(2n+1)x^{2n},n(x)^{n-1}等时\<br>可“先积后导”\<br>(3)常用的幂级数展开式\</p>
+<p>\star \frac{1}{1-x}=\sum_{n=0}^{\infty}x^n\<br>=1+x+x^2+…+x^n+…(-1&lt;x&lt;1)\<br>\star \frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^nx^n\<br>=1-x+x^2-…+x^n+…(-1&lt;x&lt;1)\<br>$$</p>
+<h1 id="函数展开成幂级数"><a href="#函数展开成幂级数" class="headerlink" title="函数展开成幂级数"></a>函数展开成幂级数</h1><p>$$<br>y=f(x)在x=x_0的邻域内，\<br>（任意阶可导）具有充分的光滑性\<br>泰勒级数：\<br>f(x)=f(x_0)+\frac{f’(x_0)}{1!}(x-x_0)\<br>+\frac{f’’(x_0)}{2!}(x-x_0)^2+…\<br>+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+…\<br>当x_0=0时,\<br>即为麦克劳林级数：\<br>f(x)=f(0)+\frac{f’(0)}{1!}x\<br>+\frac{f’’(0)}{2!}x^2+…+\frac{f^{(n)}(0)}{n!}x^n+…\</p>
+<p>$$</p>
+<h2 id="常用的几个函数展开"><a href="#常用的几个函数展开" class="headerlink" title="常用的几个函数展开"></a>常用的几个函数展开</h2><p>$$<br>(1)e^x=1+x+\frac{1}{2!}x^2+…+\frac{1}{n!}x^n+… \<br>x\in (-\infty,+\infty)\<br>(2)sinx=x-\frac{1}{3!}x^3+\frac{1}{5!}x^5-\frac{1}{7!}x^7\<br>+…+\frac{(-1)^{n-1}}{(2n-1)!}x^{2n-1}+…\<br>x\in (-\infty,+\infty)\<br>(3)cosx=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^4}{6!}\<br>+…+\frac{(-1)^{n-1}}{(2n)!}x^{2n}+…\<br>x\in (-\infty,+\infty)\<br>(4)ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-…\+(-1)^n\frac{x^{n+1}}{n+1}+… \<br>x\in(-1,1]<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag"># 高等数学</a>
+              <a href="/tags/%E4%B8%93%E5%8D%87%E6%9C%AC/" rel="tag"># 专升本</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/31/%E4%B8%93%E5%8D%87%E6%9C%AC%E9%AB%98%E6%95%B0%E7%9A%84%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/" rel="prev" title="专升本高数的中值定理">
+      <i class="fa fa-chevron-left"></i> 专升本高数的中值定理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/14/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A%E5%AE%B6%E5%BA%AD%E6%99%BA%E8%83%BD%E7%BD%91%E5%85%B3-EPON-4-1-WiFi-2-4G-%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/" rel="next" title="中国联通家庭智能网关 EPON/4+1+WiFi(2.4G) 管理员密码破解">
+      中国联通家庭智能网关 EPON/4+1+WiFi(2.4G) 管理员密码破解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%AE%A8%E8%AE%BA%E7%AD%89%E6%AF%94%E7%BA%A7%E6%95%B0%EF%BC%88%E4%B9%9F%E7%A7%B0%E5%87%A0%E4%BD%95%E7%BA%A7%E6%95%B0%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">一、讨论等比级数（也称几何级数）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81P%E2%80%94%E2%80%94%E7%BA%A7%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">二、P——级数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0%EF%BC%88%E5%8F%91%E6%95%A3%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">调和级数（发散）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%A7%E6%95%B0%E7%9B%B8%E5%8A%A0%E7%9A%84%E6%95%9B%E6%95%A3%E6%80%A7%E5%8F%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">三、级数相加的敛散性变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%AD%A3%E9%A1%B9%E7%BA%A7%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">四、正项级数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E9%A1%B9%E7%BA%A7%E6%95%B0%E7%9A%84%E6%95%9B%E6%95%A3%E6%80%A7%E5%88%A4%E5%88%AB%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">正项级数的敛散性判别法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89%E6%B3%95%EF%BC%9A"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.定义法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%E6%B3%95%EF%BC%9A"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.基本定理法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%AD%A3%E9%A1%B9%E7%BA%A7%E6%95%B0%E6%AF%94%E8%BE%83%E5%AE%A1%E6%95%9B%E6%B3%95%EF%BC%9A"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.正项级数比较审敛法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Th1-%EF%BC%88%E6%AF%94%E8%BE%83%E5%AE%A1%E6%95%9B%E6%B3%95%EF%BC%89"><span class="nav-number">4.1.3.1.</span> <span class="nav-text">Th1:（比较审敛法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Th2-%E6%AF%94%E8%BE%83%E5%AE%A1%E6%95%9B%E6%B3%95%E7%9A%84%E6%9E%81%E9%99%90%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.1.3.2.</span> <span class="nav-text">Th2:比较审敛法的极限形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Th3-%EF%BC%88%E6%AF%94%E5%80%BC%E5%AE%A1%E6%95%9B%E6%B3%95%EF%BC%89"><span class="nav-number">4.1.3.3.</span> <span class="nav-text">Th3:（比值审敛法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Th4-%E6%A0%B9%E6%A4%8D%E5%AE%A1%E6%95%9B%E6%B3%95"><span class="nav-number">4.1.3.4.</span> <span class="nav-text">Th4:(根植审敛法)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BA%A4%E9%94%99%E7%BA%A7%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">五、交错级数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B1%E5%B8%83%E5%B0%BC%E5%85%B9%E5%88%A4%E5%88%AB%E6%B3%95%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">莱布尼兹判别法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9%E6%94%B6%E6%95%9B%E5%92%8C%E6%9D%A1%E4%BB%B6%E6%94%B6%E6%95%9B"><span class="nav-number">5.2.</span> <span class="nav-text">绝对收敛和条件收敛</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B9%82%E7%BA%A7%E6%95%B0%EF%BC%88%E5%87%BD%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0%EF%BC%89%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">六、幂级数（函数项级数）：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%BC%BA%E9%A1%B9%E5%B9%82%E5%87%BD%E6%95%B0%E6%94%B6%E6%95%9B%E5%9F%9F%E3%80%81%E6%94%B6%E6%95%9B%E5%8C%BA%E9%97%B4%E6%B1%82%E6%B3%95%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">不缺项幂函数收敛域、收敛区间求法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B9%E7%9A%84%E5%B9%82%E5%87%BD%E6%95%B0%E6%94%B6%E6%95%9B%E5%9F%9F%E3%80%81%E6%94%B6%E6%95%9B%E5%8C%BA%E9%97%B4%E6%B1%82%E6%B3%95%EF%BC%9A"><span class="nav-number">6.3.</span> <span class="nav-text">缺项的幂函数收敛域、收敛区间求法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%82%E7%BA%A7%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">7.</span> <span class="nav-text">幂级数和函数的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">性质：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%82%E7%BA%A7%E6%95%B0-%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E6%B1%82%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">幂级数 和函数的求法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%B1%95%E5%BC%80%E6%88%90%E5%B9%82%E7%BA%A7%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">函数展开成幂级数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B1%95%E5%BC%80"><span class="nav-number">9.1.</span> <span class="nav-text">常用的几个函数展开</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王树波</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王树波</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>

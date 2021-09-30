@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1.要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击2.到eclipse官网下载 eclipse jee。  在这里我下载了linux64位压缩包版本的3.下载完成后将文件移动到 &#x2F;opt&#x2F;eclipse-jee文件夹  4.解压压缩包1tar xzvf eclipse-jee-2018-09-linux-gtk-x86_64.tar.gz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu18.04下安装eclipse-jee">
+<meta property="og:url" content="https://shubo6.github.io/2019/02/17/ubuntu18-04%E4%B8%8B%E5%AE%89%E8%A3%85eclipse-jee/index.html">
+<meta property="og:site_name" content="王树波的博客">
+<meta property="og:description" content="1.要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击2.到eclipse官网下载 eclipse jee。  在这里我下载了linux64位压缩包版本的3.下载完成后将文件移动到 &#x2F;opt&#x2F;eclipse-jee文件夹  4.解压压缩包1tar xzvf eclipse-jee-2018-09-linux-gtk-x86_64.tar.gz">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-17T00:05:13.000Z">
+<meta property="article:modified_time" content="2020-04-02T22:53:52.000Z">
+<meta property="article:author" content="王树波">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shubo6.github.io/2019/02/17/ubuntu18-04%E4%B8%8B%E5%AE%89%E8%A3%85eclipse-jee/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ubuntu18.04下安装eclipse-jee | 王树波的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王树波的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/02/17/ubuntu18-04%E4%B8%8B%E5%AE%89%E8%A3%85eclipse-jee/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王树波">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王树波的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ubuntu18.04下安装eclipse-jee
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-17 08:05:13" itemprop="dateCreated datePublished" datetime="2019-02-17T08:05:13+08:00">2019-02-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-03 06:53:52" itemprop="dateModified" datetime="2020-04-03T06:53:52+08:00">2020-04-03</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>667</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <br>
+
+
+
+<h2 id="1-要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击"><a href="#1-要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击" class="headerlink" title="1.要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击"></a>1.要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了<a target="_blank" rel="noopener" href="http://blog.shubo6.cn/2019/02/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/">详情点击</a></h2><h2 id="2-到eclipse官网下载-eclipse-jee。"><a href="#2-到eclipse官网下载-eclipse-jee。" class="headerlink" title="2.到eclipse官网下载 eclipse jee。"></a>2.到<a target="_blank" rel="noopener" href="http://www.eclipse.org/downloads/packages/">eclipse官网下载</a> eclipse jee。</h2>
+
+<h3 id="在这里我下载了linux64位压缩包版本的"><a href="#在这里我下载了linux64位压缩包版本的" class="headerlink" title="在这里我下载了linux64位压缩包版本的"></a>在这里我下载了linux64位压缩包版本的</h3><h2 id="3-下载完成后将文件移动到-opt-eclipse-jee文件夹"><a href="#3-下载完成后将文件移动到-opt-eclipse-jee文件夹" class="headerlink" title="3.下载完成后将文件移动到 /opt/eclipse-jee文件夹"></a>3.下载完成后将文件移动到 /opt/eclipse-jee文件夹</h2>
+
+<h2 id="4-解压压缩包"><a href="#4-解压压缩包" class="headerlink" title="4.解压压缩包"></a>4.解压压缩包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf eclipse-jee-2018-09-linux-gtk-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-创建eclipse桌面快捷图标"><a href="#5-创建eclipse桌面快捷图标" class="headerlink" title="5.创建eclipse桌面快捷图标"></a>5.创建eclipse桌面快捷图标</h2><h3 id="（1）编辑eclipse-desktop"><a href="#（1）编辑eclipse-desktop" class="headerlink" title="（1）编辑eclipse.desktop"></a>（1）编辑eclipse.desktop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/applications</span><br><span class="line">vim eclipse.desktop</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）在文件中写入-其中“Exec-”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon-”后面为eclipse安装目录下的图标图片的路径"><a href="#（2）在文件中写入-其中“Exec-”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon-”后面为eclipse安装目录下的图标图片的路径" class="headerlink" title="（2）在文件中写入(其中“Exec=”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon=”后面为eclipse安装目录下的图标图片的路径)"></a>（2）在文件中写入(其中“Exec=”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon=”后面为eclipse安装目录下的图标图片的路径)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name=Eclipse</span><br><span class="line">Comment=Eclipse</span><br><span class="line">Exec=/opt/eclipse-jee/eclipse/eclipse</span><br><span class="line">Icon=/opt/eclipse-jee/eclipse/icon.xpm</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">StartupNotify=<span class="literal">true</span></span><br><span class="line">Type=Application</span><br><span class="line">Categories=Application;Development;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-将eclipse变为可执行文件"><a href="#6-将eclipse变为可执行文件" class="headerlink" title="6.将eclipse变为可执行文件"></a>6.将eclipse变为可执行文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x eclipse.desktop</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-在-usr-share-applications目录下即可打开eclipse（也可以复制到桌面打开）"><a href="#7-在-usr-share-applications目录下即可打开eclipse（也可以复制到桌面打开）" class="headerlink" title="7.在/usr/share/applications目录下即可打开eclipse（也可以复制到桌面打开）"></a>7.在/usr/share/applications目录下即可打开eclipse（也可以复制到桌面打开）</h2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/16/hexo%E6%8C%87%E4%BB%A4/" rel="prev" title="hexo常用指令">
+      <i class="fa fa-chevron-left"></i> hexo常用指令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/21/windows%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BAwamp%E7%8E%AF%E5%A2%83/" rel="next" title="windows下手动搭建wamp环境">
+      windows下手动搭建wamp环境 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A6%81%E4%BD%BF%E7%94%A8eclipse%E9%A6%96%E5%85%88%E9%85%8D%E7%BD%AEjdk%E4%BB%A5%E5%8F%8Ajre%E7%9A%84java%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E3%80%82%E5%89%8D%E8%BE%B9%E5%B7%B2%E7%BB%8F%E5%86%99%E8%BF%87%E4%BA%86%E8%BF%99%E9%87%8C%E5%B0%B1%E4%B8%8D%E5%86%99%E4%BA%86%E8%AF%A6%E6%83%85%E7%82%B9%E5%87%BB"><span class="nav-number">1.</span> <span class="nav-text">1.要使用eclipse首先配置jdk以及jre的java环境变量。前边已经写过了这里就不写了详情点击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%B0eclipse%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD-eclipse-jee%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">2.到eclipse官网下载 eclipse jee。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E8%BF%99%E9%87%8C%E6%88%91%E4%B8%8B%E8%BD%BD%E4%BA%86linux64%E4%BD%8D%E5%8E%8B%E7%BC%A9%E5%8C%85%E7%89%88%E6%9C%AC%E7%9A%84"><span class="nav-number">2.1.</span> <span class="nav-text">在这里我下载了linux64位压缩包版本的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%90%8E%E5%B0%86%E6%96%87%E4%BB%B6%E7%A7%BB%E5%8A%A8%E5%88%B0-opt-eclipse-jee%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">3.</span> <span class="nav-text">3.下载完成后将文件移动到 &#x2F;opt&#x2F;eclipse-jee文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A7%A3%E5%8E%8B%E5%8E%8B%E7%BC%A9%E5%8C%85"><span class="nav-number">4.</span> <span class="nav-text">4.解压压缩包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%88%9B%E5%BB%BAeclipse%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E5%9B%BE%E6%A0%87"><span class="nav-number">5.</span> <span class="nav-text">5.创建eclipse桌面快捷图标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%BC%96%E8%BE%91eclipse-desktop"><span class="nav-number">5.1.</span> <span class="nav-text">（1）编辑eclipse.desktop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD%E5%86%99%E5%85%A5-%E5%85%B6%E4%B8%AD%E2%80%9CExec-%E2%80%9D%E5%90%8E%E9%9D%A2%E4%B8%BAeclipse%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84eclipse%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BD%8D%E7%BD%AE%E8%B7%AF%E5%BE%84%EF%BC%8C%E2%80%9CIcon-%E2%80%9D%E5%90%8E%E9%9D%A2%E4%B8%BAeclipse%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E5%9B%BE%E6%A0%87%E5%9B%BE%E7%89%87%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="nav-number">5.2.</span> <span class="nav-text">（2）在文件中写入(其中“Exec&#x3D;”后面为eclipse安装目录下的eclipse程序的位置路径，“Icon&#x3D;”后面为eclipse安装目录下的图标图片的路径)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B0%86eclipse%E5%8F%98%E4%B8%BA%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">6.将eclipse变为可执行文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%9C%A8-usr-share-applications%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%8D%B3%E5%8F%AF%E6%89%93%E5%BC%80eclipse%EF%BC%88%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%A4%8D%E5%88%B6%E5%88%B0%E6%A1%8C%E9%9D%A2%E6%89%93%E5%BC%80%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">7.在&#x2F;usr&#x2F;share&#x2F;applications目录下即可打开eclipse（也可以复制到桌面打开）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王树波</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王树波</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>

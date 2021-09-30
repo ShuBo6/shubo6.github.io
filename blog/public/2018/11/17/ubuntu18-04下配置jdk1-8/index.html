@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ubuntu下配置jdk第一步与win10下相同  首先来到 官网下载jdk：https:&#x2F;&#x2F;www.oracle.com&#x2F;technetwork&#x2F;java&#x2F;javase&#x2F;downloads&#x2F;jdk8-downloads-2133151.html   在这里下载 压缩包的版本。  1.下载完成后，解压文件 使用命令：1tar -zxvf jdk-8u191-linux-x64.tar.gz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu18.04下配置jdk1.8">
+<meta property="og:url" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/index.html">
+<meta property="og:site_name" content="王树波的博客">
+<meta property="og:description" content="ubuntu下配置jdk第一步与win10下相同  首先来到 官网下载jdk：https:&#x2F;&#x2F;www.oracle.com&#x2F;technetwork&#x2F;java&#x2F;javase&#x2F;downloads&#x2F;jdk8-downloads-2133151.html   在这里下载 压缩包的版本。  1.下载完成后，解压文件 使用命令：1tar -zxvf jdk-8u191-linux-x64.tar.gz">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/Ubuntu18.04logo.png">
+<meta property="og:image" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p1.png">
+<meta property="og:image" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p3.png">
+<meta property="og:image" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p2.png">
+<meta property="article:published_time" content="2018-11-17T19:01:00.000Z">
+<meta property="article:modified_time" content="2019-06-29T16:07:32.000Z">
+<meta property="article:author" content="王树波">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/Ubuntu18.04logo.png">
+
+<link rel="canonical" href="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ubuntu18.04下配置jdk1.8 | 王树波的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王树波的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王树波">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王树波的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ubuntu18.04下配置jdk1.8
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-18 03:01:00" itemprop="dateCreated datePublished" datetime="2018-11-18T03:01:00+08:00">2018-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-06-30 00:07:32" itemprop="dateModified" datetime="2019-06-30T00:07:32+08:00">2019-06-30</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>959</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <br>
+
+<img src="/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/Ubuntu18.04logo.png" class="" title="ubuntu logo">
+
+<h1 id="ubuntu下配置jdk第一步与win10下相同-首先来到-官网下载jdk："><a href="#ubuntu下配置jdk第一步与win10下相同-首先来到-官网下载jdk：" class="headerlink" title="ubuntu下配置jdk第一步与win10下相同  首先来到 官网下载jdk："></a>ubuntu下配置jdk第一步与win10下相同  首先来到 <a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">官网下载jdk</a>：</h1><p><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<img src="/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p1.png" class="" title="p1">
+
+<h3 id="在这里下载-压缩包的版本。"><a href="#在这里下载-压缩包的版本。" class="headerlink" title="在这里下载 压缩包的版本。"></a>在这里下载 压缩包的版本。</h3><img src="/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p3.png" class="" title="p3">
+
+<h2 id="1-下载完成后，解压文件-使用命令："><a href="#1-下载完成后，解压文件-使用命令：" class="headerlink" title="1.下载完成后，解压文件 使用命令："></a>1.下载完成后，解压文件 使用命令：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u191-linux-x64.tar.gz </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解压完成后-将文件移动到-usr-lib"><a href="#2-解压完成后-将文件移动到-usr-lib" class="headerlink" title="2.解压完成后 将文件移动到 /usr/lib"></a>2.解压完成后 将文件移动到 /usr/lib</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv jdk1.8.0_191 /usr/lib/jdk1.8</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-修改环境变量"><a href="#3-修改环境变量" class="headerlink" title="3.修改环境变量"></a>3.修改环境变量</h2><h3 id="（1）使用全局设置方法，它是所有用户的共用的环境变量"><a href="#（1）使用全局设置方法，它是所有用户的共用的环境变量" class="headerlink" title="（1）使用全局设置方法，它是所有用户的共用的环境变量"></a>（1）使用全局设置方法，它是所有用户的共用的环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）在文件末尾追加路径"><a href="#（2）在文件末尾追加路径" class="headerlink" title="（2）在文件末尾追加路径"></a>（2）在文件末尾追加路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk1.8</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<img src="/2018/11/17/ubuntu18-04%E4%B8%8B%E9%85%8D%E7%BD%AEjdk1-8/p2.png" class="" title="p2">
+
+<h3 id="（3）生效-bashrc文件"><a href="#（3）生效-bashrc文件" class="headerlink" title="（3）生效~/.bashrc文件"></a>（3）生效~/.bashrc文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~./bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）最后执行这几条命令"><a href="#（4）最后执行这几条命令" class="headerlink" title="（4）最后执行这几条命令"></a>（4）最后执行这几条命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/lib/jdk1.8/bin/java 300</span><br><span class="line">sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jdk1.8/bin/javac 300</span><br><span class="line">sudo update-alternatives --install /usr/bin/jar jar /usr/lib/jdk1.8/bin/jar 300</span><br><span class="line">sudo update-alternatives --install /usr/bin/javah javah /usr/lib/jdk1.8/bin/javah 300</span><br><span class="line">sudo update-alternatives --install /usr/bin/javap javap /usr/lib/jdk1.8/bin/javap 300</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-测试是否成功："><a href="#4-测试是否成功：" class="headerlink" title="4.测试是否成功："></a>4.测试是否成功：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java javac java -version</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/01/%E6%B2%99%E9%9B%95%E7%8B%97%E5%AD%90%E4%BB%AC/" rel="prev" title="沙雕狗子们">
+      <i class="fa fa-chevron-left"></i> 沙雕狗子们
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/18/ubuntu18-04%E4%B8%8B%E5%AE%89%E8%A3%85mariaDB/" rel="next" title="ubuntu18.04下安装mariaDB">
+      ubuntu18.04下安装mariaDB <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu%E4%B8%8B%E9%85%8D%E7%BD%AEjdk%E7%AC%AC%E4%B8%80%E6%AD%A5%E4%B8%8Ewin10%E4%B8%8B%E7%9B%B8%E5%90%8C-%E9%A6%96%E5%85%88%E6%9D%A5%E5%88%B0-%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDjdk%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">ubuntu下配置jdk第一步与win10下相同  首先来到 官网下载jdk：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E8%BF%99%E9%87%8C%E4%B8%8B%E8%BD%BD-%E5%8E%8B%E7%BC%A9%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC%E3%80%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">在这里下载 压缩包的版本。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6-%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">1.下载完成后，解压文件 使用命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%A7%A3%E5%8E%8B%E5%AE%8C%E6%88%90%E5%90%8E-%E5%B0%86%E6%96%87%E4%BB%B6%E7%A7%BB%E5%8A%A8%E5%88%B0-usr-lib"><span class="nav-number">1.2.</span> <span class="nav-text">2.解压完成后 将文件移动到 &#x2F;usr&#x2F;lib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">3.修改环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BD%BF%E7%94%A8%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%8C%E5%AE%83%E6%98%AF%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E7%9A%84%E5%85%B1%E7%94%A8%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">（1）使用全局设置方法，它是所有用户的共用的环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%9C%A8%E6%96%87%E4%BB%B6%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E8%B7%AF%E5%BE%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">（2）在文件末尾追加路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%94%9F%E6%95%88-bashrc%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">（3）生效~&#x2F;.bashrc文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%9C%80%E5%90%8E%E6%89%A7%E8%A1%8C%E8%BF%99%E5%87%A0%E6%9D%A1%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.4.</span> <span class="nav-text">（4）最后执行这几条命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">4.测试是否成功：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王树波</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王树波</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>

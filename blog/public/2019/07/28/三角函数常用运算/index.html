@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="诱导公式：公式一：　　设α为任意角,终边相同的角的同一三角函数的值相等：  $sin(2kπ+α)&#x3D;sinα$$cos(2kπ+α)&#x3D;cosα$$tan(2kπ+α)&#x3D;tanα$$cot(2kπ+α)&#x3D;cotα$ 公式二：　　设α为任意角,π+α的三角函数值与α的三角函数值之间的关系：  　　$sin(π+α)&#x3D;-sinα$　　$cos(π+α)&#x3D;-cosα$　　$tan(π+α)&#x3D; tanα">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三角函数常用运算">
+<meta property="og:url" content="https://shubo6.github.io/2019/07/28/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E5%B8%B8%E7%94%A8%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="王树波的博客">
+<meta property="og:description" content="诱导公式：公式一：　　设α为任意角,终边相同的角的同一三角函数的值相等：  $sin(2kπ+α)&#x3D;sinα$$cos(2kπ+α)&#x3D;cosα$$tan(2kπ+α)&#x3D;tanα$$cot(2kπ+α)&#x3D;cotα$ 公式二：　　设α为任意角,π+α的三角函数值与α的三角函数值之间的关系：  　　$sin(π+α)&#x3D;-sinα$　　$cos(π+α)&#x3D;-cosα$　　$tan(π+α)&#x3D; tanα">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-28T13:04:59.000Z">
+<meta property="article:modified_time" content="2019-08-05T14:24:21.000Z">
+<meta property="article:author" content="王树波">
+<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="三角函数">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shubo6.github.io/2019/07/28/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E5%B8%B8%E7%94%A8%E8%BF%90%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>三角函数常用运算 | 王树波的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王树波的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/07/28/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E5%B8%B8%E7%94%A8%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王树波">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王树波的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          三角函数常用运算
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-28 21:04:59" itemprop="dateCreated datePublished" datetime="2019-07-28T21:04:59+08:00">2019-07-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-05 22:24:21" itemprop="dateModified" datetime="2019-08-05T22:24:21+08:00">2019-08-05</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <!-- $$
+$sinx \sim x$ -->
+
+<h2 id="诱导公式："><a href="#诱导公式：" class="headerlink" title="诱导公式："></a>诱导公式：</h2><h3 id="公式一："><a href="#公式一：" class="headerlink" title="公式一："></a>公式一：</h3><p>　　设α为任意角,终边相同的角的同一三角函数的值相等： </p>
+<p>$sin(2kπ+α)=sinα$<br>$cos(2kπ+α)=cosα$<br>$tan(2kπ+α)=tanα$<br>$cot(2kπ+α)=cotα$</p>
+<h3 id="公式二："><a href="#公式二：" class="headerlink" title="公式二："></a>公式二：</h3><p>　　设α为任意角,π+α的三角函数值与α的三角函数值之间的关系： </p>
+<p>　　$sin(π+α)=-sinα$<br>　　$cos(π+α)=-cosα$<br>　　$tan(π+α)= tanα$<br>　　$cot(π+α)= cotα$ </p>
+<h3 id="公式三："><a href="#公式三：" class="headerlink" title="公式三："></a>公式三：</h3><p>　　任意角α与 -α的三角函数值之间的关系： </p>
+<p>　　$sin(-α)=-sinα$<br>　　$cos(-α)= cosα$<br>　　$tan(-α)=-tanα$<br>　　$cot(-α)=-cotα$ </p>
+<h3 id="公式四："><a href="#公式四：" class="headerlink" title="公式四："></a>公式四：</h3><p>　　利用公式二和公式三可以得到π-α与α的三角函数值之间的关系：<br>　　$sin(π-α)= sinα$<br>　　$cos(π-α)=-cosα$<br>　　$tan(π-α)=-tanα$<br>　　$cot(π-α)=-cotα$ </p>
+<h3 id="公式五："><a href="#公式五：" class="headerlink" title="公式五："></a>公式五：</h3><p>　　利用公式一和公式三可以得到2π-α与α的三角函数值之间的关系：<br>　　$sin(2π-α)=-sinα$<br>　　$cos(2π-α)= cosα$<br>　　$tan(2π-α)=-tanα$<br>　　$cot(2π-α)=-cotα$ </p>
+<h3 id="公式六："><a href="#公式六：" class="headerlink" title="公式六："></a>公式六：</h3><p>　　π/2±α与α的三角函数值之间的关系：<br>　　$sin(π/2+α)= cosα$<br>　　$cos(π/2+α)=-sinα$<br>　　$tan(π/2+α)=-cotα$<br>　　$cot(π/2+α)=-tanα$<br>　　$sin(π/2-α)= cosα$<br>　　$cos(π/2-α)= sinα$<br>　　$tan(π/2-α)= cotα$<br>　　$cot(π/2-α)= tanα$</p>
+<h3 id="诱导公式记忆口诀"><a href="#诱导公式记忆口诀" class="headerlink" title="诱导公式记忆口诀"></a>诱导公式记忆口诀</h3><p>　　※规律总结※</p>
+<blockquote>
+<p>　　上面这些诱导公式可以概括为：<br>　　对于<code>k•π/2±α(k∈Z)</code>的个三角函数值,<br>　　①当k是偶数时,得到α的同名函数值,即函数名不改变；<br>　　②当k是奇数时,得到α相应的余函数值,即<code>sin→cos;cos→sin;tan→cot,cot→tan</code>.<br>　　(奇变偶不变)<br>　　然后在前面加上把α看成锐角时原函数值的符号.<br>　　(符号看象限)<br>　　例如：<br>　　sin(2π-α)=sin(4•π/2-α),k=4为偶数,所以取sinα.<br>　　当α是锐角时,2π-α∈(270°,360°),sin(2π-α)＜0,符号为“-”.<br>　　所以sin(2π-α)=-sinα<br>　　上述的记忆口诀是：<br>　　奇变偶不变,符号看象限.<br>　　公式右边的符号为把α视为锐角时,角k•360°+α(k∈Z),-α、180°±α,360°-α<br>　　所在象限的原三角函数值的符号可记忆<br>　　水平诱导名不变；符号看象限.<br>　　各种三角函数在四个象限的符号如何判断,也可以记住口诀“一全正；二正弦；三为切；四余弦”．<br>　　这十二字口诀的意思就是说：<br>　　第一象限内任何一个角的四种三角函数值都是“+”；<br>　　第二象限内只有正弦是“+”,其余全部是“-”；<br>　　第三象限内切函数是“+”,弦函数是“-”；<br>　　第四象限内只有余弦是“+”,其余全部是“-”．<br>　　上述记忆口诀,一全正,二正弦,三正切,四余弦</p>
+</blockquote>
+<h3 id="其他三角函数知识："><a href="#其他三角函数知识：" class="headerlink" title="其他三角函数知识："></a>其他三角函数知识：</h3><p>　　⒈同角三角函数的基本关系式</p>
+<h4 id="倒数关系"><a href="#倒数关系" class="headerlink" title="倒数关系:"></a>倒数关系:</h4><p>　　$tanα •cotα=1$<br>　　$sinα •cscα=1$<br>　　$cosα •secα=1$</p>
+<h4 id="商的关系："><a href="#商的关系：" class="headerlink" title="商的关系："></a>商的关系：</h4><p>　　$sinα/cosα=tanα=secα/cscα$<br>　　$cosα/sinα=cotα=cscα/secα$</p>
+<h4 id="平方关系："><a href="#平方关系：" class="headerlink" title="平方关系："></a>平方关系：</h4><p>　　$sin^2(α)+cos^2(α)=1$<br>　　$1+tan^2(α)=sec^2(α)$<br>　　$1+cot^2(α)=csc^2(α)$</p>
+<h3 id="两角和差公式"><a href="#两角和差公式" class="headerlink" title="两角和差公式"></a>两角和差公式</h3><p>　　$sin(α+β)=sinαcosβ+cosαsinβ$<br>　　$sin(α-β)=sinαcosβ-cosαsinβ$<br>　　$cos(α+β)=cosαcosβ-sinαsinβ$<br>　　$tan(α+β)=\frac{tanα+tanβ}{1-tanα •tanβ}$<br>　　$tan(α-β)=\frac{tanα-tanβ}{1+tanα •tanβ}$</p>
+<h3 id="倍角公式"><a href="#倍角公式" class="headerlink" title="倍角公式"></a>倍角公式</h3><p>二倍角的正弦、余弦和正切公式,升幂缩角公式<br>　　$sin2α=2sinαcosα$<br>　　$cos2α=cos^2(α)-sin^2(α)<br>=2cos^2(α)-1<br>=1-2sin^2(α)$<br>　　$tan2α=\frac{2tanα}{1-tan^2(α)}$</p>
+<h3 id="半角公式"><a href="#半角公式" class="headerlink" title="半角公式"></a>半角公式</h3><p>　　半角的正弦、余弦和正切公式(降幂扩角公式)<br>　　 $sin^2(\frac{α}{2})=\frac{1－cosα}{2}$<br>　　 $cos^2(\frac{α}{2})=\frac{1＋cosα}{2}$<br>　　 $tan^2(\frac{α}{2})=\frac{1－cosα}{1＋cosα}$</p>
+<h3 id="万能公式"><a href="#万能公式" class="headerlink" title="万能公式"></a>万能公式</h3><p>　　$sinα=\frac{2tan(\frac{α}{2})}{1+tan^2(\frac{α}{2})}$<br>　　$cosα=\frac{1-tan^2(\frac{α}{2})}{1+tan^2(\frac{α}{2})}$<br>　　$tanα=\frac{2tan(\frac{α}{2})}{1-tan^2(\frac{α}{2})}$
+　　 </p>
+<h3 id="万能公式推导"><a href="#万能公式推导" class="headerlink" title="万能公式推导"></a>万能公式推导</h3><p>　　附推导：<br>　　$sin2α=2sinαcosα=\frac{2sinαcosα}{(cos^2(α)+sin^2(α))}$,<br>　　(因为$cos^2(α)+sin^2(α)=1$)<br>　　再把*分式上下同除$cos^2(α)$,可得$sin2α=2tanα/(1+tan^2(α))$<br>　　然后用$\frac{α}{2}$代替α即可.<br>　　同理可推导余弦的万能公式.正切的万能公式可通过正弦比余弦得到.</p>
+<h3 id="三倍角公式"><a href="#三倍角公式" class="headerlink" title="三倍角公式"></a>三倍角公式</h3><p>　　三倍角的正弦、余弦和正切公式<br>　　$sin3α=3sinα-4sin^3(α)$<br>　　$cos3α=4cos^3(α)-3cosα$<br>　　$tan3α=\frac{3tanα-tan^3(α)}{1-3tan^2(α)}$<br>　　<br>　　三倍角公式推导<br>　　附推导：<br>　　$tan3α=\frac{sin3α}{cos3α}$<br>　　$=\frac{(sin2αcosα+cos2αsinα)}{(cos2αcosα-sin2αsinα)}$<br>　　$=\frac{(2sinαcos^2(α)+cos^2(α)sinα-sin^3(α))}{(cos^3(α)-cosαsin^2(α)-2sin^2(α)cosα)}$<br>　　上下同除以$cos^3(α)$,得：<br>　　$tan3α=\frac{(3tanα-tan^3(α))}{(1-3tan^2(α))}$<br>　　$sin3α=sin(2α+α)=sin2αcosα+cos2αsinα$<br>　　$=2sinαcos^2(α)+(1-2sin^2(α))sinα$<br>　　$=2sinα-2sin^3(α)+sinα-2sin^2(α)$<br>　　$=3sinα-4sin^3(α)$</p>
+<p>　　$cos3α=cos(2α+α)=cos2αcosα-sin2αsinα$<br>　　$=(2cos^2(α)-1)cosα-2cosαsin^2(α)$<br>　　$=2cos^3(α)-cosα+(2cosα-2cos^3(α))$<br>　　$=4cos^3(α)-3cosα$<br>　　即<br>　　$sin3α=3sinα-4sin^3(α)$<br>　　$cos3α=4cos^3(α)-3cosα$<br>　　三倍角公式联想记忆<br>　　记忆方法：谐音、联想<br>　　正弦三倍角：3元 减 4元3角(欠债了(被减成负数),所以要“挣钱”(音似“正弦”))<br>　　余弦三倍角：4元3角 减 3元(减完之后还有“余”)<br>　　☆☆注意函数名,即正弦的三倍角都用正弦表示,余弦的三倍角都用余弦表示.</p>
+<h3 id="和差化积公式"><a href="#和差化积公式" class="headerlink" title="和差化积公式"></a>和差化积公式</h3><p>　　三角函数的和差化积公式<br>　　<br>　　$sinα+sinβ=2sin\frac{α+β}{2}•cos\frac{α-β}{2}$<br>　　<br>　　$sinα-sinβ=2sin\frac{α-β}{2}•cos\frac{α+β}{2}$</p>
+<p>　 　<br>　　$cosα+cosβ=2cos\frac{α+β}{2}•cos\frac{α-β}{2}$<br>　<br>　　<br>　　$cosα-cosβ=-2sin\frac{α+β}{2}•sin\frac{α-β}{2}$</p>
+<h3 id="积化和差公式"><a href="#积化和差公式" class="headerlink" title="积化和差公式"></a>积化和差公式</h3><p>　　三角函数的积化和差公式<br>　　$sinα •cosβ=0.5[sin(α+β)+sin(α-β)]$<br>　　$cosα •sinβ=0.5[sin(α+β)-sin(α-β)]$<br>　　$cosα •cosβ=0.5[cos(α+β)+cos(α-β)]$<br>　　$sinα •sinβ=- 0.5[cos(α+β)-cos(α-β)]$</p>
+<h3 id="和差化积公式-1"><a href="#和差化积公式-1" class="headerlink" title="和差化积公式"></a>和差化积公式</h3><p>　　附推导：首先,我们知道<br>$sin(α+β)=sinα cosβ+cosα sinβ$<br>$sin(α-β)=sinα cosβ-cosα sinβ$<br>　　我们把两式相加就得到<br>$sin(α+β)+sin(α-β)=2sinα cosβ$<br>　　所以,<br>$sinα cosβ=\frac{sin(α+β)+sin(α-β)}{2}$<br>　　同理,若把两式相减,就得到<br>$cosα sinβ=\frac{sin(α+β)-sin(α-β)}{2}$<br>　　同样的,我们还知道<br>$cos(α+β)=cosα cosβ-sinα sinβ$,<br>$cos(α-β)=cosα cosβ+sinα sinβ$<br>　　所以,把两式相加,我们就可以得到<br>$cos(α+β)+cos(α-β)=2cosα cosβ$<br>　　所以我们就得到,<br>$cosα cosβ=\frac{cos(α+β)+cos(α-β)}{2}$<br>　　同理,两式相减我们就得到<br>$sinα sinβ=-\frac{cos(α+β)-cos(α-β)}{2}$<br>　　这样,我们就得到了积化和差的四个公式:<br>$sinα cosβ=\frac{sin(α+β)+sin(α-β)}{2}$<br>$cosα sinβ=\frac{sin(α+β)-sin(α-β)}{2}$<br>$cosα cosβ=\frac{cos(α+β)+cos(α-β)}{2}$<br>$sinα sinβ=-\frac{cos(α+β)-cos(α-β)}{2}$<br>　　好,有了积化和差的四个公式以后,我们只需一个变形,就可以得到和差化积的四个公式.<br>　　我们把上述四个公式中的α+β设为x,α-β设为y,那么<br>$α=\frac{x+y}{2}$,<br>$β=\frac{x-y}{2}$<br>　　把α,β分别用x,y表示就可以得到和差化积的四个公式:<br>$sinx+siny=2sin\frac{x+y}{2} cos\frac{x-y}{2}$<br>$sinx-siny=2cos\frac{x+y}{2} sin\frac{x-y}{2}$<br>$cosx+cosy=2cos\frac{x+y}{2} cos\frac{x-y}{2}$<br>$cosx-cosy=-2sin\frac{x+y}{2} sin\frac{x-y}{2}$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag"># 高等数学</a>
+              <a href="/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/" rel="tag"># 三角函数</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/19/%E5%A5%87%E5%87%BD%E6%95%B0%E5%81%B6%E5%87%BD%E6%95%B0%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8/" rel="prev" title="奇函数偶函数基本性质">
+      <i class="fa fa-chevron-left"></i> 奇函数偶函数基本性质
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/30/%E7%AD%89%E4%BB%B7%E6%97%A0%E7%A9%B7%E5%B0%8F%E6%9B%BF%E6%8D%A2%E5%85%AC%E5%BC%8F/" rel="next" title="等价无穷小替换公式">
+      等价无穷小替换公式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B1%E5%AF%BC%E5%85%AC%E5%BC%8F%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">诱导公式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E4%B8%80%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">公式一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E4%BA%8C%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">公式二：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E4%B8%89%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">公式三：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E5%9B%9B%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">公式四：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E4%BA%94%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">公式五：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E5%85%AD%EF%BC%9A"><span class="nav-number">1.6.</span> <span class="nav-text">公式六：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B1%E5%AF%BC%E5%85%AC%E5%BC%8F%E8%AE%B0%E5%BF%86%E5%8F%A3%E8%AF%80"><span class="nav-number">1.7.</span> <span class="nav-text">诱导公式记忆口诀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="nav-number">1.8.</span> <span class="nav-text">其他三角函数知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%80%92%E6%95%B0%E5%85%B3%E7%B3%BB"><span class="nav-number">1.8.1.</span> <span class="nav-text">倒数关系:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%95%86%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="nav-number">1.8.2.</span> <span class="nav-text">商的关系：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E6%96%B9%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="nav-number">1.8.3.</span> <span class="nav-text">平方关系：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E8%A7%92%E5%92%8C%E5%B7%AE%E5%85%AC%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">两角和差公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%8D%E8%A7%92%E5%85%AC%E5%BC%8F"><span class="nav-number">1.10.</span> <span class="nav-text">倍角公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E8%A7%92%E5%85%AC%E5%BC%8F"><span class="nav-number">1.11.</span> <span class="nav-text">半角公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%87%E8%83%BD%E5%85%AC%E5%BC%8F"><span class="nav-number">1.12.</span> <span class="nav-text">万能公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%87%E8%83%BD%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.13.</span> <span class="nav-text">万能公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%80%8D%E8%A7%92%E5%85%AC%E5%BC%8F"><span class="nav-number">1.14.</span> <span class="nav-text">三倍角公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C%E5%B7%AE%E5%8C%96%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">1.15.</span> <span class="nav-text">和差化积公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%AF%E5%8C%96%E5%92%8C%E5%B7%AE%E5%85%AC%E5%BC%8F"><span class="nav-number">1.16.</span> <span class="nav-text">积化和差公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C%E5%B7%AE%E5%8C%96%E7%A7%AF%E5%85%AC%E5%BC%8F-1"><span class="nav-number">1.17.</span> <span class="nav-text">和差化积公式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王树波</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王树波</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>

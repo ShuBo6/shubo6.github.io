@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近review了大一时候的期末实训学籍管理系统的代码。 发现自己并不明白多文件之间的变量定义和声明，在这里做个记录。  建议使用codeblocks  让我们来看看程序是咋写的文件目录结构 123456789主菜单   menu.c成绩输入 stu1.c ：在文件stu.dat中增加一个或多个新的学生和相应的成绩；成绩修改 stu2.c ：对已有学生的成绩进行修改；查询成绩 stu3.c ：根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言文件之间变量的定义和声明">
+<meta property="og:url" content="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/index.html">
+<meta property="og:site_name" content="王树波的博客">
+<meta property="og:description" content="最近review了大一时候的期末实训学籍管理系统的代码。 发现自己并不明白多文件之间的变量定义和声明，在这里做个记录。  建议使用codeblocks  让我们来看看程序是咋写的文件目录结构 123456789主菜单   menu.c成绩输入 stu1.c ：在文件stu.dat中增加一个或多个新的学生和相应的成绩；成绩修改 stu2.c ：对已有学生的成绩进行修改；查询成绩 stu3.c ：根">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/1.png">
+<meta property="og:image" content="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/2.png">
+<meta property="article:published_time" content="2019-06-02T04:41:56.000Z">
+<meta property="article:modified_time" content="2019-06-29T16:07:45.000Z">
+<meta property="article:author" content="王树波">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/1.png">
+
+<link rel="canonical" href="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>c语言文件之间变量的定义和声明 | 王树波的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">王树波的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王树波">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王树波的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c语言文件之间变量的定义和声明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-02 12:41:56" itemprop="dateCreated datePublished" datetime="2019-06-02T12:41:56+08:00">2019-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-06-30 00:07:45" itemprop="dateModified" datetime="2019-06-30T00:07:45+08:00">2019-06-30</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <br>
+最近review了大一时候的期末实训学籍管理系统的代码。
+发现自己并不明白多文件之间的变量定义和声明，在这里做个记录。
+<img src="/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/1.png" class="">
+建议使用codeblocks
+
+<h2 id="让我们来看看程序是咋写的"><a href="#让我们来看看程序是咋写的" class="headerlink" title="让我们来看看程序是咋写的"></a>让我们来看看程序是咋写的</h2><h3 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h3><img src="/2019/06/02/%E8%AE%B0%E5%BD%95c%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E/2.png" class="">
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">主菜单   menu.c</span><br><span class="line">成绩输入 stu1.c ：在文件stu.dat中增加一个或多个新的学生和相应的成绩；</span><br><span class="line">成绩修改 stu2.c ：对已有学生的成绩进行修改；</span><br><span class="line">查询成绩 stu3.c ：根据学号或者姓名查询成绩；</span><br><span class="line">显示成绩 stu4.c ：显示所有学生的成绩（每页10个）；</span><br><span class="line">统计成绩 stu5.c ：对所有学生的成绩，可以按照某一科进行升序排序；</span><br><span class="line">注销学生 stu6.c ：注销某学生及其相关记录；</span><br><span class="line">成绩导入 stu7.c ：将已经在其他文件里的学生成绩，导入到学生成绩数据文件； </span><br><span class="line">整个系统  mscore.c</span><br></pre></td></tr></table></figure>
+<h2 id="mscore-c-main"><a href="#mscore-c-main" class="headerlink" title="mscore.c (main)"></a>mscore.c (main)</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my.h&quot;</span></span></span><br><span class="line"><span class="keyword">int</span> BFUN=<span class="number">0</span>;<span class="comment">/* 定义全局变量，用来显示学籍信息个数 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	system(<span class="string">&quot;color 3f&quot;</span>);</span><br><span class="line">	OI();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="my-h"><a href="#my-h" class="headerlink" title="my.h"></a>my.h</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MY_H_INCLUDED</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_H_INCLUDED</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUMBER 200</span></span><br><span class="line"><span class="keyword">extern</span>  <span class="keyword">int</span> BFUN;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> name[<span class="number">50</span>];<span class="comment">/* 姓名 */</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> num;<span class="comment">/* 学号 */</span></span><br><span class="line">	<span class="keyword">int</span> math;<span class="comment">/* 数学 */</span></span><br><span class="line">	<span class="keyword">int</span> physical;<span class="comment">/* 物理 */</span></span><br><span class="line">	<span class="keyword">int</span> english;<span class="comment">/* 英语 */</span></span><br><span class="line">	<span class="keyword">int</span> count; <span class="comment">/* 总分 */</span></span><br><span class="line"></span><br><span class="line">&#125;boy[NUMBER],Temp;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 定义函数说明（全局说明） */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">INPUT</span><span class="params">()</span></span>;<span class="comment">/* 1.输入学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QUERY</span><span class="params">(<span class="keyword">int</span> q)</span></span>;<span class="comment">/* 2 查询学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CHANGE</span><span class="params">()</span></span>;<span class="comment">/* 3 修改学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DELETION</span><span class="params">()</span></span>;<span class="comment">/* 4 删除学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SEQUENCE</span><span class="params">()</span></span>;<span class="comment">/* 5 排列学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SHOW</span><span class="params">()</span></span>;<span class="comment">/* 6 显示学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SAVE</span><span class="params">()</span></span>;<span class="comment">/* 7 保存学生信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LAYIN</span><span class="params">()</span></span>;<span class="comment">/* 9 导入信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LOGOUT</span><span class="params">()</span></span>;<span class="comment">/* 退出程序界面 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OI</span><span class="params">()</span></span>;<span class="comment">/* 操作选项 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OUTPUT</span><span class="params">(<span class="keyword">int</span> i)</span></span>;<span class="comment">/* 输出信息 */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">XG</span><span class="params">(<span class="keyword">int</span> k)</span></span>;<span class="comment">/* 修改信息调用 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// MY_H_INCLUDED</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="stu1-c"><a href="#stu1-c" class="headerlink" title="stu1.c"></a>stu1.c</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;my.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">INPUT</span><span class="params">()</span><span class="comment">/* 1.输入学生全部信息 */</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\t\t* * * * * * * * * * * * * * * * &gt;* * * * *\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\t\t*      你已进入学生信息录入模块    &gt;     *\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\t\t* * * * * * * * * * * * * * * * &gt;* * * * *\n&quot;</span>);</span><br><span class="line">	x=BFUN;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)<span class="comment">/* 把全局变量BFUN的值赋给x */</span></span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\t请输入第%d个学生的信息（键入‘0’退出&gt;录入）\n&quot;</span>,++x);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n\t录入信息包含项【学号，姓名，数学，&gt;物理，外语，总成绩】回车键入下一项”\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n学号：&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;Temp.num);</span><br><span class="line">		<span class="keyword">if</span>(Temp.num==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=BFUN;i++)</span><br><span class="line">			<span class="keyword">if</span>(Temp.num==boy[i].num)</span><br><span class="line">			&#123;</span><br><span class="line">				system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;\n\n\t该学籍已被注册！\n\n&quot;</span>)&gt;;INPUT();</span><br><span class="line">			&#125;</span><br><span class="line">		getchar();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n姓名：&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,&amp;Temp.name);</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">strlen</span>(Temp.name)&gt;<span class="number">20</span>)<span class="comment">/* 限制姓名字符长度&gt;为20 */</span></span><br><span class="line">		&#123;</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n\n\t姓名输入有误，超出限度。&gt;\n\n&quot;</span>);INPUT();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n数学成绩：&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;Temp.math);</span><br><span class="line">		<span class="keyword">if</span>(Temp.math&lt;=<span class="number">0</span>||Temp.math&gt;=<span class="number">150</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\t成绩输入有误！\n\n\n&quot;</span>);</span><br><span class="line">			INPUT();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n物理成绩：&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;Temp.physical);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(Temp.physical&lt;=<span class="number">0</span>||Temp.physical&gt;=<span class="number">100</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\t成绩输入有误！\n\n\n&quot;</span>);</span><br><span class="line">			INPUT();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n外语成绩：&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;Temp.english);</span><br><span class="line">		<span class="keyword">if</span>(Temp.english&lt;=<span class="number">0</span>||Temp.english&gt;=<span class="number">150</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\t成绩输入有误！\n\n\n&quot;</span>);</span><br><span class="line">			INPUT();</span><br><span class="line">		&#125;</span><br><span class="line">		getchar();</span><br><span class="line">		BFUN=x;<span class="comment">/* 上面函数完全正确执行后，才会把现在的&gt;x值赋给BFUN */</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">		boy[BFUN<span class="number">-1</span>]=Temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>到这里就能直观的看出来 多个文件之间的调用关系：将结构体声明，函数声明，常量定义都写在一个自定义头文件里；然后在每一个文件中都<code>include</code>这个头文件就可以将功能模块化的分成多个文件啦。</p>
+</blockquote>
+<h4 id="还有一个问题就是extern的用法"><a href="#还有一个问题就是extern的用法" class="headerlink" title="还有一个问题就是extern的用法:"></a>还有一个问题就是<code>extern</code>的用法:</h4><blockquote>
+<p>在主文件中定义了一个BFUN的全局变量，用来计算系统中学生的数量。<br>而在当头文件，或者其他文件中想要访问这个变量就不需要再次定义了。这时候在别的地方需要声明的时候，只需要使用<code>extern</code>就ok了</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/allcando/StudentManagementSystem">项目源码下载</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/24/MongoDB%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95-windows%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E9%85%8D%E7%BD%AE/" rel="prev" title="MongoDB的使用记录(windows环境下的配置)">
+      <i class="fa fa-chevron-left"></i> MongoDB的使用记录(windows环境下的配置)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/19/Android%E8%B8%A9%E5%9D%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8Fragment%E5%AF%BC%E5%8C%85%E9%97%AE%E9%A2%98/" rel="next" title="Android踩坑——使用Fragment导包问题">
+      Android踩坑——使用Fragment导包问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A9%E6%88%91%E4%BB%AC%E6%9D%A5%E7%9C%8B%E7%9C%8B%E7%A8%8B%E5%BA%8F%E6%98%AF%E5%92%8B%E5%86%99%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">让我们来看看程序是咋写的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">文件目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mscore-c-main"><span class="nav-number">2.</span> <span class="nav-text">mscore.c (main)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#my-h"><span class="nav-number">3.</span> <span class="nav-text">my.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stu1-c"><span class="nav-number">4.</span> <span class="nav-text">stu1.c</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E5%B0%B1%E6%98%AFextern%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">4.0.1.</span> <span class="nav-text">还有一个问题就是extern的用法:</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">王树波</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王树波</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>
