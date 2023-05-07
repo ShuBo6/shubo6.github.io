@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什么是wamp环境？ 所谓wamp环境就是指在我们常用的windows环境下搭建Apache+Mysql&#x2F;MariaDB+PHP的集成环境。为什么使用wamp？ wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求主要的WAMP集成环境主要有：1、WampServe2、XAMPP3、AppServ下面我们来演示如何手动搭建wamp集成环境1.首先下载各环境所需文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows下手动搭建wamp环境">
+<meta property="og:url" content="https://shubo6.github.io/2019/02/21/windows%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BAwamp%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:site_name" content="shubo的博客">
+<meta property="og:description" content="什么是wamp环境？ 所谓wamp环境就是指在我们常用的windows环境下搭建Apache+Mysql&#x2F;MariaDB+PHP的集成环境。为什么使用wamp？ wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求主要的WAMP集成环境主要有：1、WampServe2、XAMPP3、AppServ下面我们来演示如何手动搭建wamp集成环境1.首先下载各环境所需文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-21T12:12:09.000Z">
+<meta property="article:modified_time" content="2023-05-07T03:04:38.276Z">
+<meta property="article:author" content="shubo">
+<meta property="article:tag" content="WAMP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shubo6.github.io/2019/02/21/windows%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BAwamp%E7%8E%AF%E5%A2%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>windows下手动搭建wamp环境 | shubo的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shubo的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/02/21/windows%E4%B8%8B%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BAwamp%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          windows下手动搭建wamp环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-21 20:12:09" itemprop="dateCreated datePublished" datetime="2019-02-21T20:12:09+08:00">2019-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <br>
+
+
+<h2 id="什么是wamp环境？"><a href="#什么是wamp环境？" class="headerlink" title="什么是wamp环境？"></a>什么是wamp环境？</h2><ul>
+<li><h3 id="所谓wamp环境就是指在我们常用的windows环境下搭建Apache-Mysql-MariaDB-PHP的集成环境。"><a href="#所谓wamp环境就是指在我们常用的windows环境下搭建Apache-Mysql-MariaDB-PHP的集成环境。" class="headerlink" title="所谓wamp环境就是指在我们常用的windows环境下搭建Apache+Mysql/MariaDB+PHP的集成环境。"></a>所谓wamp环境就是指在我们常用的windows环境下搭建Apache+Mysql/MariaDB+PHP的集成环境。</h3><h2 id="为什么使用wamp？"><a href="#为什么使用wamp？" class="headerlink" title="为什么使用wamp？"></a>为什么使用wamp？</h2></li>
+<li><h3 id="wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求"><a href="#wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求" class="headerlink" title="wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求"></a>wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求</h3><h2 id="主要的WAMP集成环境主要有："><a href="#主要的WAMP集成环境主要有：" class="headerlink" title="主要的WAMP集成环境主要有："></a>主要的WAMP集成环境主要有：</h2><h3 id="1、WampServe"><a href="#1、WampServe" class="headerlink" title="1、WampServe"></a>1、<strong>WampServe</strong></h3><h3 id="2、XAMPP"><a href="#2、XAMPP" class="headerlink" title="2、XAMPP"></a>2、<strong>XAMPP</strong></h3><h3 id="3、AppServ"><a href="#3、AppServ" class="headerlink" title="3、AppServ"></a>3、<strong>AppServ</strong></h3><h1 id="下面我们来演示如何手动搭建wamp集成环境"><a href="#下面我们来演示如何手动搭建wamp集成环境" class="headerlink" title="下面我们来演示如何手动搭建wamp集成环境"></a>下面我们来演示如何手动搭建wamp集成环境</h1><h2 id="1-首先下载各环境所需文件：（访问官网建议科学上网，需要其他版本自行到官网下载）"><a href="#1-首先下载各环境所需文件：（访问官网建议科学上网，需要其他版本自行到官网下载）" class="headerlink" title="1.首先下载各环境所需文件：（访问官网建议科学上网，需要其他版本自行到官网下载）"></a>1.首先下载各环境所需文件：（访问官网建议科学上网，需要其他版本自行到官网下载）</h2></li>
+<li><h4 id="apache2-4-64位-32位"><a href="#apache2-4-64位-32位" class="headerlink" title="apache2.4 64位 32位"></a>apache2.4 <a target="_blank" rel="noopener" href="https://home.apache.org/~steffenal/VC15/binaries/httpd-2.4.38-win64-VC15.zip">64位</a> <a target="_blank" rel="noopener" href="https://home.apache.org/~steffenal/VC15/binaries/httpd-2.4.38-win32-VC15.zip">32位</a></h4></li>
+<li><h4 id="mysql5-7-25-64位-32位"><a href="#mysql5-7-25-64位-32位" class="headerlink" title="mysql5.7.25 64位 32位"></a>mysql5.7.25 <a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.25-winx64.zip">64位</a> <a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.25-win32.zip">32位</a></h4></li>
+<li><h4 id="php（Thread-Safe）-64位-32位"><a href="#php（Thread-Safe）-64位-32位" class="headerlink" title="php（Thread Safe） 64位 32位"></a>php（Thread Safe） <a target="_blank" rel="noopener" href="https://windows.php.net/downloads/releases/php-5.6.40-Win32-VC11-x64.zip">64位</a> <a target="_blank" rel="noopener" href="https://windows.php.net/downloads/releases/php-5.6.40-Win32-VC11-x86.zip">32位</a></h4></li>
+<li><h4 id="如果出现无法运行的情况请自行到微软官网下载vc组件"><a href="#如果出现无法运行的情况请自行到微软官网下载vc组件" class="headerlink" title="如果出现无法运行的情况请自行到微软官网下载vc组件"></a>如果出现无法运行的情况请自行到微软官网下载vc组件</h4><h2 id="2-开始设置配置文件"><a href="#2-开始设置配置文件" class="headerlink" title="2.开始设置配置文件"></a>2.开始设置配置文件</h2></li>
+</ul>
+<h4 id="1）-Apache默认使用80端口，在计算机中一个端口只能被一个软件占用。"><a href="#1）-Apache默认使用80端口，在计算机中一个端口只能被一个软件占用。" class="headerlink" title="1） Apache默认使用80端口，在计算机中一个端口只能被一个软件占用。"></a>1） Apache默认使用80端口，在计算机中一个端口只能被一个软件占用。</h4><h4 id="nbsp-nbsp-如果80端口被占用："><a href="#nbsp-nbsp-如果80端口被占用：" class="headerlink" title="&nbsp;&nbsp;如果80端口被占用："></a>&nbsp;&nbsp;如果80端口被占用：</h4><h4 id="nbsp-nbsp-①停止80端口暂用的软件"><a href="#nbsp-nbsp-①停止80端口暂用的软件" class="headerlink" title="&nbsp;&nbsp;①停止80端口暂用的软件"></a>&nbsp;&nbsp;①停止80端口暂用的软件</h4><h4 id="nbsp-nbsp-②修改apache默认端口"><a href="#nbsp-nbsp-②修改apache默认端口" class="headerlink" title="&nbsp;&nbsp;②修改apache默认端口"></a>&nbsp;&nbsp;②修改apache默认端口</h4><h4 id="2）-使用DOS命令管理Apache"><a href="#2）-使用DOS命令管理Apache" class="headerlink" title="2） 使用DOS命令管理Apache"></a>2） 使用DOS命令管理Apache</h4><h4 id="必须要用管理员身份打开dos窗口"><a href="#必须要用管理员身份打开dos窗口" class="headerlink" title="必须要用管理员身份打开dos窗口"></a>必须要用管理员身份打开dos窗口</h4><h4 id="安装：httpd-k-install"><a href="#安装：httpd-k-install" class="headerlink" title="安装：httpd -k install"></a>安装：<code>httpd -k install</code></h4><h4 id="卸载：httpd-k-uninstall"><a href="#卸载：httpd-k-uninstall" class="headerlink" title="卸载：httpd -k uninstall"></a>卸载：<code>httpd -k uninstall</code></h4><h4 id="启动-关闭-重启：httpd-k-start-stop-restart"><a href="#启动-关闭-重启：httpd-k-start-stop-restart" class="headerlink" title="启动/关闭/重启：httpd -k start/stop/restart"></a>启动/关闭/重启：<code>httpd -k start/stop/restart</code></h4><h4 id="查看版本：httpd-v-（version）"><a href="#查看版本：httpd-v-（version）" class="headerlink" title="查看版本：httpd -v              （version）"></a>查看版本：<code>httpd -v</code>              （version）</h4><h4 id="查看支持模块：httpd-m-（modules）"><a href="#查看支持模块：httpd-m-（modules）" class="headerlink" title="查看支持模块：httpd -m            （modules）"></a>查看支持模块：<code>httpd -m </code>           （modules）</h4><h4 id="查看配置文件是否有错误：httpd-t-（test）"><a href="#查看配置文件是否有错误：httpd-t-（test）" class="headerlink" title="查看配置文件是否有错误：httpd -t  （test）"></a>查看配置文件是否有错误：<code>httpd -t</code>  （test）</h4><h4 id="修改httpd-conf-文件（此步骤较长且网上教程较多自行google）"><a href="#修改httpd-conf-文件（此步骤较长且网上教程较多自行google）" class="headerlink" title="修改httpd.conf 文件（此步骤较长且网上教程较多自行google）"></a>修改httpd.conf 文件（此步骤较长且网上教程较多自行google）</h4><h4 id="3）-测试Apache是否安装成功"><a href="#3）-测试Apache是否安装成功" class="headerlink" title="3） 测试Apache是否安装成功"></a>3） 测试Apache是否安装成功</h4><h5 id="访问：http-127-0-0-1-或-http-localhost"><a href="#访问：http-127-0-0-1-或-http-localhost" class="headerlink" title="访问：http://127.0.0.1   或 http://localhost"></a>访问：<a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1</a>   或 <a target="_blank" rel="noopener" href="http://localhost/">http://localhost</a></h5><h2 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><h4 id="1-将php解压"><a href="#1-将php解压" class="headerlink" title="1)将php解压"></a>1)将php解压</h4><h4 id="2-让Apache支持PHP"><a href="#2-让Apache支持PHP" class="headerlink" title="2)让Apache支持PHP"></a>2)让Apache支持PHP</h4><h5 id="修改httpd-conf-文件"><a href="#修改httpd-conf-文件" class="headerlink" title="修改httpd.conf 文件"></a>修改httpd.conf 文件</h5><h5 id="在httpd-conf-文件末尾追加以下内容"><a href="#在httpd-conf-文件末尾追加以下内容" class="headerlink" title="在httpd.conf 文件末尾追加以下内容"></a>在httpd.conf 文件末尾追加以下内容</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#声明PHP配置文件所在目录（php.ini）</span><br><span class="line">PHPIniDir D:\wamp\php5</span><br><span class="line">#加载php7模块（目的：让apache有能力处理php文件）</span><br><span class="line">LoadModule php5_module D:\wamp\php5\php5apache2_4.dll</span><br><span class="line">#让apache遇到.php文件交给PHP模块处理</span><br><span class="line">AddType application/x-httpd-php .php</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><h3 id="先把mysql解压"><a href="#先把mysql解压" class="headerlink" title="先把mysql解压"></a>先把mysql解压</h3><h4 id="1-修改配置文件（my-ini）"><a href="#1-修改配置文件（my-ini）" class="headerlink" title="1)修改配置文件（my.ini）"></a>1)修改配置文件（my.ini）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port=3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=O:\mysql-8.0.11-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=O:\mysql-8.0.11-winx64\data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=200</span><br><span class="line"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span><br><span class="line">max_connect_errors=10</span><br><span class="line"># 服务端使用的字符集默认为UTF8</span><br><span class="line">character-set-server=utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=3306</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用DOS命令管理MySQL"><a href="#2-使用DOS命令管理MySQL" class="headerlink" title="2)使用DOS命令管理MySQL"></a>2)使用DOS命令管理MySQL</h3><h4 id="前提是把mysql解压好了-ini文件修改好了dos窗口一定要用管理员权限打开"><a href="#前提是把mysql解压好了-ini文件修改好了dos窗口一定要用管理员权限打开" class="headerlink" title="前提是把mysql解压好了  ini文件修改好了dos窗口一定要用管理员权限打开"></a>前提是把mysql解压好了  ini文件修改好了dos窗口一定要用管理员权限打开</h4><h4 id="安装服务：mysqld-install"><a href="#安装服务：mysqld-install" class="headerlink" title="安装服务：mysqld --install"></a>安装服务：<code>mysqld --install</code></h4><h4 id="卸载服务：mysqld-remove-mysql"><a href="#卸载服务：mysqld-remove-mysql" class="headerlink" title="卸载服务：mysqld --remove mysql"></a>卸载服务：<code>mysqld --remove mysql</code></h4><h4 id="启动-关闭：net-start-stop-mysql"><a href="#启动-关闭：net-start-stop-mysql" class="headerlink" title="启动/关闭：net start/stop mysql"></a>启动/关闭：<code>net start/stop mysql</code></h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/WAMP/" rel="tag"># WAMP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/17/ubuntu18-04%E4%B8%8B%E5%AE%89%E8%A3%85eclipse-jee/" rel="prev" title="ubuntu18.04下安装eclipse-jee">
+      <i class="fa fa-chevron-left"></i> ubuntu18.04下安装eclipse-jee
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/02/21/%E4%BD%BF%E7%94%A8%E5%AE%9D%E5%A1%94%E6%90%AD%E5%BB%BA%E4%B8%80%E9%94%AE%E6%90%AD%E5%BB%BA%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83/" rel="next" title="使用宝塔搭建一键搭建集成环境">
+      使用宝塔搭建一键搭建集成环境 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFwamp%E7%8E%AF%E5%A2%83%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是wamp环境？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E8%B0%93wamp%E7%8E%AF%E5%A2%83%E5%B0%B1%E6%98%AF%E6%8C%87%E5%9C%A8%E6%88%91%E4%BB%AC%E5%B8%B8%E7%94%A8%E7%9A%84windows%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%90%AD%E5%BB%BAApache-Mysql-MariaDB-PHP%E7%9A%84%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">所谓wamp环境就是指在我们常用的windows环境下搭建Apache+Mysql&#x2F;MariaDB+PHP的集成环境。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8wamp%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么使用wamp？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wamp%E9%9B%86%E6%88%90%E4%BA%86php%E7%9A%84%E8%A7%A3%E6%9E%90%E5%99%A8%E4%BB%A5%E5%8F%8Amysql%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E8%83%BD%E5%A4%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99%E9%9C%80%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">wamp集成了php的解析器以及mysql数据库，能够实现一些常用的动态网站需求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%9A%84WAMP%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83%E4%B8%BB%E8%A6%81%E6%9C%89%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">主要的WAMP集成环境主要有：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81WampServe"><span class="nav-number">3.1.</span> <span class="nav-text">1、WampServe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81XAMPP"><span class="nav-number">3.2.</span> <span class="nav-text">2、XAMPP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81AppServ"><span class="nav-number">3.3.</span> <span class="nav-text">3、AppServ</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E6%9D%A5%E6%BC%94%E7%A4%BA%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BAwamp%E9%9B%86%E6%88%90%E7%8E%AF%E5%A2%83"><span class="nav-number"></span> <span class="nav-text">下面我们来演示如何手动搭建wamp集成环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A6%96%E5%85%88%E4%B8%8B%E8%BD%BD%E5%90%84%E7%8E%AF%E5%A2%83%E6%89%80%E9%9C%80%E6%96%87%E4%BB%B6%EF%BC%9A%EF%BC%88%E8%AE%BF%E9%97%AE%E5%AE%98%E7%BD%91%E5%BB%BA%E8%AE%AE%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%EF%BC%8C%E9%9C%80%E8%A6%81%E5%85%B6%E4%BB%96%E7%89%88%E6%9C%AC%E8%87%AA%E8%A1%8C%E5%88%B0%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1.首先下载各环境所需文件：（访问官网建议科学上网，需要其他版本自行到官网下载）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#apache2-4-64%E4%BD%8D-32%E4%BD%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">apache2.4 64位 32位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql5-7-25-64%E4%BD%8D-32%E4%BD%8D"><span class="nav-number">1.0.2.</span> <span class="nav-text">mysql5.7.25 64位 32位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php%EF%BC%88Thread-Safe%EF%BC%89-64%E4%BD%8D-32%E4%BD%8D"><span class="nav-number">1.0.3.</span> <span class="nav-text">php（Thread Safe） 64位 32位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%87%BA%E7%8E%B0%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E7%9A%84%E6%83%85%E5%86%B5%E8%AF%B7%E8%87%AA%E8%A1%8C%E5%88%B0%E5%BE%AE%E8%BD%AF%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDvc%E7%BB%84%E4%BB%B6"><span class="nav-number">1.0.4.</span> <span class="nav-text">如果出现无法运行的情况请自行到微软官网下载vc组件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BC%80%E5%A7%8B%E8%AE%BE%E7%BD%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2.开始设置配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%89-Apache%E9%BB%98%E8%AE%A4%E4%BD%BF%E7%94%A880%E7%AB%AF%E5%8F%A3%EF%BC%8C%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E4%B8%80%E4%B8%AA%E7%AB%AF%E5%8F%A3%E5%8F%AA%E8%83%BD%E8%A2%AB%E4%B8%80%E4%B8%AA%E8%BD%AF%E4%BB%B6%E5%8D%A0%E7%94%A8%E3%80%82"><span class="nav-number">2.0.1.</span> <span class="nav-text">1） Apache默认使用80端口，在计算机中一个端口只能被一个软件占用。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nbsp-nbsp-%E5%A6%82%E6%9E%9C80%E7%AB%AF%E5%8F%A3%E8%A2%AB%E5%8D%A0%E7%94%A8%EF%BC%9A"><span class="nav-number">2.0.2.</span> <span class="nav-text">  如果80端口被占用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nbsp-nbsp-%E2%91%A0%E5%81%9C%E6%AD%A280%E7%AB%AF%E5%8F%A3%E6%9A%82%E7%94%A8%E7%9A%84%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.0.3.</span> <span class="nav-text">  ①停止80端口暂用的软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nbsp-nbsp-%E2%91%A1%E4%BF%AE%E6%94%B9apache%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.0.4.</span> <span class="nav-text">  ②修改apache默认端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%89-%E4%BD%BF%E7%94%A8DOS%E5%91%BD%E4%BB%A4%E7%AE%A1%E7%90%86Apache"><span class="nav-number">2.0.5.</span> <span class="nav-text">2） 使用DOS命令管理Apache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%85%E9%A1%BB%E8%A6%81%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%98%E8%BA%AB%E4%BB%BD%E6%89%93%E5%BC%80dos%E7%AA%97%E5%8F%A3"><span class="nav-number">2.0.6.</span> <span class="nav-text">必须要用管理员身份打开dos窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9Ahttpd-k-install"><span class="nav-number">2.0.7.</span> <span class="nav-text">安装：httpd -k install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%EF%BC%9Ahttpd-k-uninstall"><span class="nav-number">2.0.8.</span> <span class="nav-text">卸载：httpd -k uninstall</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-%E5%85%B3%E9%97%AD-%E9%87%8D%E5%90%AF%EF%BC%9Ahttpd-k-start-stop-restart"><span class="nav-number">2.0.9.</span> <span class="nav-text">启动&#x2F;关闭&#x2F;重启：httpd -k start&#x2F;stop&#x2F;restart</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%EF%BC%9Ahttpd-v-%EF%BC%88version%EF%BC%89"><span class="nav-number">2.0.10.</span> <span class="nav-text">查看版本：httpd -v              （version）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%94%AF%E6%8C%81%E6%A8%A1%E5%9D%97%EF%BC%9Ahttpd-m-%EF%BC%88modules%EF%BC%89"><span class="nav-number">2.0.11.</span> <span class="nav-text">查看支持模块：httpd -m            （modules）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E6%9C%89%E9%94%99%E8%AF%AF%EF%BC%9Ahttpd-t-%EF%BC%88test%EF%BC%89"><span class="nav-number">2.0.12.</span> <span class="nav-text">查看配置文件是否有错误：httpd -t  （test）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9httpd-conf-%E6%96%87%E4%BB%B6%EF%BC%88%E6%AD%A4%E6%AD%A5%E9%AA%A4%E8%BE%83%E9%95%BF%E4%B8%94%E7%BD%91%E4%B8%8A%E6%95%99%E7%A8%8B%E8%BE%83%E5%A4%9A%E8%87%AA%E8%A1%8Cgoogle%EF%BC%89"><span class="nav-number">2.0.13.</span> <span class="nav-text">修改httpd.conf 文件（此步骤较长且网上教程较多自行google）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%EF%BC%89-%E6%B5%8B%E8%AF%95Apache%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-number">2.0.14.</span> <span class="nav-text">3） 测试Apache是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%EF%BC%9Ahttp-127-0-0-1-%E6%88%96-http-localhost"><span class="nav-number">2.0.14.1.</span> <span class="nav-text">访问：http:&#x2F;&#x2F;127.0.0.1   或 http:&#x2F;&#x2F;localhost</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85PHP"><span class="nav-number">3.</span> <span class="nav-text">安装PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B0%86php%E8%A7%A3%E5%8E%8B"><span class="nav-number">3.0.1.</span> <span class="nav-text">1)将php解压</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AE%A9Apache%E6%94%AF%E6%8C%81PHP"><span class="nav-number">3.0.2.</span> <span class="nav-text">2)让Apache支持PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9httpd-conf-%E6%96%87%E4%BB%B6"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">修改httpd.conf 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8httpd-conf-%E6%96%87%E4%BB%B6%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">在httpd.conf 文件末尾追加以下内容</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-number">4.</span> <span class="nav-text">安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E6%8A%8Amysql%E8%A7%A3%E5%8E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">先把mysql解压</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88my-ini%EF%BC%89"><span class="nav-number">4.1.1.</span> <span class="nav-text">1)修改配置文件（my.ini）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8DOS%E5%91%BD%E4%BB%A4%E7%AE%A1%E7%90%86MySQL"><span class="nav-number">4.2.</span> <span class="nav-text">2)使用DOS命令管理MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%98%AF%E6%8A%8Amysql%E8%A7%A3%E5%8E%8B%E5%A5%BD%E4%BA%86-ini%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E5%A5%BD%E4%BA%86dos%E7%AA%97%E5%8F%A3%E4%B8%80%E5%AE%9A%E8%A6%81%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E6%89%93%E5%BC%80"><span class="nav-number">4.2.1.</span> <span class="nav-text">前提是把mysql解压好了  ini文件修改好了dos窗口一定要用管理员权限打开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1%EF%BC%9Amysqld-install"><span class="nav-number">4.2.2.</span> <span class="nav-text">安装服务：mysqld --install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD%E6%9C%8D%E5%8A%A1%EF%BC%9Amysqld-remove-mysql"><span class="nav-number">4.2.3.</span> <span class="nav-text">卸载服务：mysqld --remove mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8-%E5%85%B3%E9%97%AD%EF%BC%9Anet-start-stop-mysql"><span class="nav-number">4.2.4.</span> <span class="nav-text">启动&#x2F;关闭：net start&#x2F;stop mysql</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shubo</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shubo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>

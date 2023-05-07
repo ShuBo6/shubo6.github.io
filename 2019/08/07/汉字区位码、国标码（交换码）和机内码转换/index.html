@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="摘自： https:&#x2F;&#x2F;cloud.tencent.com&#x2F;info&#x2F;2913b4ee92510eaf6988435e3a70e442.html  一、区位码为了适应计算机处理汉字信息的需要，1981年我国颁布了GB2312国家标准。该标准选出6763个常用汉字（其中，一级常用汉字3755个，二级汉字3008个）和682个非汉字字符，并为每个字符规定了标准代码，以便在不同的计算机系统之间进行汉字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汉字区位码、国标码（交换码）和机内码转换">
+<meta property="og:url" content="https://shubo6.github.io/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="shubo的博客">
+<meta property="og:description" content="摘自： https:&#x2F;&#x2F;cloud.tencent.com&#x2F;info&#x2F;2913b4ee92510eaf6988435e3a70e442.html  一、区位码为了适应计算机处理汉字信息的需要，1981年我国颁布了GB2312国家标准。该标准选出6763个常用汉字（其中，一级常用汉字3755个，二级汉字3008个）和682个非汉字字符，并为每个字符规定了标准代码，以便在不同的计算机系统之间进行汉字">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shubo6.github.io/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/1.jpg">
+<meta property="article:published_time" content="2019-08-07T10:13:58.000Z">
+<meta property="article:modified_time" content="2023-05-07T03:04:38.301Z">
+<meta property="article:author" content="shubo">
+<meta property="article:tag" content="计算机专升本公共课">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shubo6.github.io/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/1.jpg">
+
+<link rel="canonical" href="https://shubo6.github.io/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>汉字区位码、国标码（交换码）和机内码转换 | shubo的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shubo的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          汉字区位码、国标码（交换码）和机内码转换
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-07 18:13:58" itemprop="dateCreated datePublished" datetime="2019-08-07T18:13:58+08:00">2019-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <br>
+摘自：
+https://cloud.tencent.com/info/2913b4ee92510eaf6988435e3a70e442.html
+
+<h2 id="一、区位码"><a href="#一、区位码" class="headerlink" title="一、区位码"></a>一、区位码</h2><p>为了适应计算机处理汉字信息的需要，1981年我国颁布了GB2312国家标准。该标准选出6763个常用汉字（其中，一级常用汉字3755个，二级汉字3008个）和682个非汉字字符，并为每个字符规定了标准代码，以便在不同的计算机系统之间进行汉字文本交换。</p>
+<p>GB2312字符集构成一个94行、94列的二维表，行号称为区号，列号称为位号，每一个汉字或符号在码表中的位置用它所在的区号和位号来表示。</p>
+<p>为了处理与存储的方便，每个汉字的区号和位号在计算机内部分别用一个字节来表示。例如，”学”字的区号为49，位号为07，它的区位码即为4907，用2个字节的二进制数表示为：</p>
+<blockquote>
+<p>00110001 00000111</p>
+</blockquote>
+<img src="/2019/08/07/%E6%B1%89%E5%AD%97%E5%8C%BA%E4%BD%8D%E7%A0%81%E3%80%81%E5%9B%BD%E6%A0%87%E7%A0%81%EF%BC%88%E4%BA%A4%E6%8D%A2%E7%A0%81%EF%BC%89%E5%92%8C%E6%9C%BA%E5%86%85%E7%A0%81%E8%BD%AC%E6%8D%A2/1.jpg" class="">
+
+<h2 id="二、国标交换码"><a href="#二、国标交换码" class="headerlink" title="二、国标交换码"></a>二、国标交换码</h2><p>区位码无法用于汉字通信，因为它可能与通信使用的控制码（00H<del>1FH）（即0</del>31）发生冲突。（因为ASCII码编码中分控制信号编码和有型字符编码，前32个是控制码，如回车、换行、退格等，为避开这些控制码，国标码规定在区位码的基础上加20H，即32的16进制数）ISO2022规定每个汉字的区号和位号必须分别加上32（即二进制数00100000），经过这样的处理而得的代码称为国标交换码，简称交换码或国际码，因此，”学”字的国标交换码计算为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">00110001 00000111</span><br><span class="line"></span><br><span class="line">+00100000 +00100000</span><br><span class="line"></span><br><span class="line">______________________</span><br><span class="line"></span><br><span class="line">01010001 00100111</span><br></pre></td></tr></table></figure>
+<p>用十六进制数表示即为<code>5127H</code>。</p>
+<h2 id="三、机内码"><a href="#三、机内码" class="headerlink" title="三、机内码"></a>三、机内码</h2><p>由于文本中通常混合使用汉字和西文字符，汉字信息如果不予以特别标识，就会与单字节的ASCII码混淆。此问题的解决方法之一是将一个汉字看成是两个扩展ASCII码，使表示GB2312汉字的两个字节的最高位都为1。这种高位为1的双字节汉字编码即为GB2312汉字的机内码，简称为内码。</p>
+<p>因此，”学”字的机内码为：</p>
+<blockquote>
+<p>11010001 10100111</p>
+</blockquote>
+<p>用16进制表示即为<code>D1A7H</code>。</p>
+<p>最后要指出的是，汉字的输入编码与汉字的机内码是不同范畴的概念。不管采用什么样的编码输入法（例如拼音、五笔字型等）来输入一个汉字，其机内码都是相同的。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>区位码、国标码与机内码的转换关系</p>
+<p>方法：</p>
+<p>（1）区位码先转换成十六进制数表示</p>
+<p>（2）（区位码的十六进制表示）＋2020H＝国标码；</p>
+<p>（3）国标码＋8080H＝机内码</p>
+<p>举例：以汉字”大”为例，”大”字的区内码为2083</p>
+<p>示例解析：</p>
+<p>1、区号为20，位号为83</p>
+<p>2、将区位号2083转换为十六进制表示为<code>1453H</code></p>
+<p>3、1453H＋2020H＝3473H，得到国标码<code>3473H</code></p>
+<p>4、3473H＋8080H＝B4F3H，得到机内码为<code>B4F3H</code></p>
+<p>5、1453H＋A0A0H＝B4F3H，得到机内码为<code>B4F3H</code></p>
+<p>6、机内码B4F3H－A0A0H＝1453H的区位码</p>
+<p>大字的区码是<code>20H</code>（32区，83位）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E5%8D%87%E6%9C%AC%E5%85%AC%E5%85%B1%E8%AF%BE/" rel="tag"># 计算机专升本公共课</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/05/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E6%B1%82%E5%AF%BC%E5%85%AC%E5%BC%8F/" rel="prev" title="高等数学求导公式">
+      <i class="fa fa-chevron-left"></i> 高等数学求导公式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/13/%E7%AB%8B%E6%96%B9%E5%B7%AE%E7%AB%8B%E6%96%B9%E5%85%AC%E5%BC%8F/" rel="next" title="立方差立方公式">
+      立方差立方公式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8C%BA%E4%BD%8D%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">一、区位码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9B%BD%E6%A0%87%E4%BA%A4%E6%8D%A2%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">二、国标交换码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%9C%BA%E5%86%85%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">三、机内码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">四、总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shubo</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shubo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">79k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:12</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>
