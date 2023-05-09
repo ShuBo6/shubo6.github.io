@@ -103,7 +103,7 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git                                                      # 设置发布类型，如git     
-  repository: git@github.com:ShuBo6/shubo6.github.io.git   # 设置repository对应的链接 选择ssh
+  repository: git@github.com-shubo6:ShuBo6/shubo6.github.io.git   # 设置repository对应的链接 选择ssh
   branch: main                                                 # 设置提交到的分支
   message: Site updated at {{ now("YYYY-MM-DD HH:mm:ss") }}      # 设置我们提交的信息
 
