@@ -160,6 +160,272 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/10/21/%E5%8E%9F%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E5%92%8C%E7%A7%BB%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/21/%E5%8E%9F%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E5%92%8C%E7%A7%BB%E7%A0%81/" class="post-title-link" itemprop="url">【转载】原码、反码、补码和移码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-21 07:08:09" itemprop="dateCreated datePublished" datetime="2020-10-21T07:08:09+08:00">2020-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>数在计算机中的表示形式统称为机器数。计算机中处理数据及运算都是采用二进制，通常规定机器数用八位二进制表示。实用的数据有正数和负数，因为计算机只能表示0、1两种状态，数据的正号“+”或负号“-”，在计算机里就用一位二进制的0或1来区别，通常放在最高位，成为符号位。 符号位数值化之后，为能方便的对机器数进行算术运算、提高运算速度，计算机设计了多种符号位与数值一起编码的方法，最常用的机器数表示方法有:原码、反码、补码和移码，下面就分别介绍一下它们的表示方法。</p>
+</blockquote>
+<h1 id="1-原码、反码、补码和移码"><a href="#1-原码、反码、补码和移码" class="headerlink" title="1 原码、反码、补码和移码"></a>1 原码、反码、补码和移码</h1><h2 id="原码：正数是其二进制本身；负数是符号位为1-数值部分取X绝对值的二进制。"><a href="#原码：正数是其二进制本身；负数是符号位为1-数值部分取X绝对值的二进制。" class="headerlink" title="原码：正数是其二进制本身；负数是符号位为1,数值部分取X绝对值的二进制。"></a>原码：正数是其二进制本身；负数是符号位为1,数值部分取X绝对值的二进制。</h2><h2 id="反码：正数的反码和原码相同；负数是符号位为1-其它位是原码取反。"><a href="#反码：正数的反码和原码相同；负数是符号位为1-其它位是原码取反。" class="headerlink" title="反码：正数的反码和原码相同；负数是符号位为1,其它位是原码取反。"></a>反码：正数的反码和原码相同；负数是符号位为1,其它位是原码取反。</h2><h2 id="补码：正数的补码和原码，反码相同；负数是符号位为1，其它位是原码取反，未位加1。（或者说负数的补码是其绝对值反码未位加1）"><a href="#补码：正数的补码和原码，反码相同；负数是符号位为1，其它位是原码取反，未位加1。（或者说负数的补码是其绝对值反码未位加1）" class="headerlink" title="补码：正数的补码和原码，反码相同；负数是符号位为1，其它位是原码取反，未位加1。（或者说负数的补码是其绝对值反码未位加1）"></a>补码：正数的补码和原码，反码相同；负数是符号位为1，其它位是原码取反，未位加1。（或者说负数的补码是其绝对值反码未位加1）</h2><h2 id="移码：将符号位取反的补码（不区分正负）"><a href="#移码：将符号位取反的补码（不区分正负）" class="headerlink" title="移码：将符号位取反的补码（不区分正负）"></a>移码：将符号位取反的补码（不区分正负）</h2><p>举个例子以一个字节8位说明：</p>
+<table>
+<thead>
+<tr>
+<th>编码</th>
+<th>108</th>
+<th>-108</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原码</td>
+<td>01101100</td>
+<td>11101100</td>
+</tr>
+<tr>
+<td>反码</td>
+<td>01101100</td>
+<td>10010011</td>
+</tr>
+<tr>
+<td>补码</td>
+<td>01101100</td>
+<td>10010100</td>
+</tr>
+<tr>
+<td>移码</td>
+<td>11101100</td>
+<td>00010100</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="2-补码求原码"><a href="#2-补码求原码" class="headerlink" title="2 补码求原码"></a>2 补码求原码</h1><p>已知一个数的补码，求原码的操作分两种情况：</p>
+<p>如果补码的符号位为“0”，表示是一个正数，所以补码就是该数的原码。</p>
+<p>如果补码的符号位为“1”，表示是一个负数，求原码的操作可以是：符号位为1；其余各位取反，然后再整个数加1。</p>
+<h1 id="3-补码加、减运算公式"><a href="#3-补码加、减运算公式" class="headerlink" title="3 补码加、减运算公式"></a>3 补码加、减运算公式</h1><p>在做补码加减法时，只需将符号位和数值部分一起参与运算，并且将符号位产生的进位丢掉即可</p>
+<p>补码加法公式</p>
+<p>  [X+Y]补 ＝ [X]补 + [Y]补<br>补码减法公式<br>  [X-Y]补 = [X]补-[Y]补 = [X]补 + [-Y]补</p>
+<blockquote>
+<p>其中：[-Y]补称为负补,求负补的办法是：对补码的每一位(包括符合位)求反，且未位加1.<br>假设字长为8的计算机sbyte类型所能表示的最大数是11111111，若再加1称为100000000(9位)，但因只有8位，最高位1自然丢失。又回了00000000，所以字长为8的二进制系统的模为2^8。</p>
+</blockquote>
+<h1 id="4-为何要使用原码-反码和补码"><a href="#4-为何要使用原码-反码和补码" class="headerlink" title="4 为何要使用原码, 反码和补码"></a>4 为何要使用原码, 反码和补码</h1><p>在开始深入学习前, 我的学习建议是先”死记硬背”上面的原码, 反码和补码的表示方式以及计算方法.</p>
+<p>现在我们知道了计算机可以有三种编码方式表示一个数. 对于正数因为三种编码方式的结果都相同:</p>
+<p>[+1] = [00000001]原 = [00000001]反 = [00000001]补</p>
+<p>所以不需要过多解释. 但是对于负数:</p>
+<p>[-1] = [10000001]原= [11111110]反= [11111111]补</p>
+<p>可见原码, 反码和补码是完全不同的. 既然原码才是被人脑直接识别并用于计算表示方式, 为何还会有反码和补码呢?</p>
+<p>首先, 因为人脑可以知道第一位是符号位, 在计算的时候我们会根据符号位, 选择对真值区域的加减. (补码的绝对值称为真值即去掉符号位的二进制数字). 但是对于计算机, 加减乘数已经是最基础的运算, 要设计的尽量简单. 计算机辨别”符号位”显然会让计算机的基础电路设计变得十分复杂! 于是人们想出了将符号位也参与运算的方法. 我们知道, 根据运算法则减去一个正数等于加上一个负数, 即: 1-1 = 1 + (-1) = 0 , 所以机器可以只有加法而没有减法, 这样计算机运算的设计就更简单了.</p>
+<p>于是人们开始探索 将符号位参与运算, 并且只保留加法的方法. 首先来看原码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<p>1 - 1 = 1 + (-1) = [00000001]原 + [10000001]原= [10000010]原 = -2</p>
+<p>如果用原码表示, 让符号位也参与计算, 显然对于减法来说, 结果是不正确的.这也就是为何计算机内部不使用原码表示一个数.</p>
+<p>为了解决原码做减法的问题, 出现了反码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<p>1 - 1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原= [0000 0001]反+ [1111 1110]反= [1111 1111]反= [1000 0000]原= -0</p>
+<p>发现用反码计算减法, 结果的真值部分是正确的. 而唯一的问题其实就出现在”0”这个特殊的数值上. 虽然人们理解上+0和-0是一样的, 但是0带符号是没有任何意义的. 而且会有[0000 0000]原和[1000 0000]原两个编码表示0.</p>
+<p>于是补码的出现, 解决了0的符号以及两个编码的问题:</p>
+<p>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补+ [1111 1111]补= [0000 0000]补=[0000 0000]原</p>
+<p>这样0用[0000 0000]表示, 而以前出现问题的-0则不存在了.而且可以用[1000 0000]表示-128:</p>
+<p>(-1) + (-127) = [1000 0001]原 + [1111 1111]原 = [1111 1111]补+ [1000 0001]补= [1000 0000]补</p>
+<p>-1-127的结果应该是-128, 在用补码运算的结果中, [1000 0000]补就是-128. 但是注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示[1000 0000]补算出来的原码是[0000 0000]原, 这是不正确的)</p>
+<p>使用补码, 不仅仅修复了0的符号以及存在两个编码的问题, 而且还能够多表示一个最低数. 这就是为什么8位二进制, 使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127].</p>
+<p>因为机器使用补码, 所以对于编程中常用到的32位int类型, 可以表示范围是: [-231, 231-1] 因为第一位表示的是符号位.而使用补码表示时又可以多保存一个最小值.</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原码负数不能参与运算并且不能做减法运算</span><br><span class="line"></span><br><span class="line">反码的+0和-0的反码不相同</span><br><span class="line"></span><br><span class="line">-128在运算中的补码是 [1000 0000]补，并没有原码和反码表示</span><br></pre></td></tr></table></figure>
+
+<p>作者：codingriver<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/abbdae4f3841">https://www.jianshu.com/p/abbdae4f3841</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/" class="post-title-link" itemprop="url">十代黑苹果OC引导相关步骤</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-29 13:34:11" itemprop="dateCreated datePublished" datetime="2020-09-29T13:34:11+08:00">2020-09-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>739</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="最近上了十代Intel"><a href="#最近上了十代Intel" class="headerlink" title="最近上了十代Intel"></a>最近上了十代Intel</h1><p>配置清单如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU:            i5-10400F</span><br><span class="line">显卡:            蓝宝石RX580 2304 4G</span><br><span class="line">主板:            技嘉B460M AORUS ELITE</span><br><span class="line">硬盘:            SN750 500G</span><br><span class="line">无线网卡：        bcm943602cs</span><br></pre></td></tr></table></figure>
+
+<p>存在的问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">睡眠问题CFG LOCK 问题</span><br><span class="line">iMessage 不会搞</span><br><span class="line">Facetime 不会搞</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iCloud 以及AppStore 使用正常不闪退。</span><br></pre></td></tr></table></figure>
+
+<h1 id="先上图"><a href="#先上图" class="headerlink" title="先上图"></a>先上图</h1><img src="/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/1.png" class="">
+<img src="/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/2.png" class="">
+<img src="/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/3.png" class="">
+
+<h1 id="我的EFI-下载地址"><a href="#我的EFI-下载地址" class="headerlink" title="我的EFI 下载地址"></a>我的EFI 下载地址</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/allcando/10th-Gen-Intel-Hackintoch-EFI</span><br></pre></td></tr></table></figure>
+
+<h1 id="基础部分（镜像以及OC-KEXT搜集）"><a href="#基础部分（镜像以及OC-KEXT搜集）" class="headerlink" title="基础部分（镜像以及OC/KEXT搜集）"></a>基础部分（镜像以及OC/KEXT搜集）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BiliBili 良心UP：司波图</span><br><span class="line">https://www.bilibili.com/video/BV1uf4y1X7MT?p=2&amp;t=48</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="部分Kexts内容解释"><a href="#部分Kexts内容解释" class="headerlink" title="部分Kexts内容解释"></a>部分Kexts内容解释</h1><table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>USBPorts.kext</td>
+<td>usb补丁</td>
+</tr>
+<tr>
+<td>IntelMausiEthernet.kext</td>
+<td>板载千兆网卡i219-v补丁</td>
+</tr>
+<tr>
+<td>RadeonBoost.kext</td>
+<td>RX系列显卡适配补丁</td>
+</tr>
+<tr>
+<td>XHCI-unsupported.kext</td>
+<td>主板不支持XHCI需要添加此补丁</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="kexts-文件夹截图"><a href="#kexts-文件夹截图" class="headerlink" title="kexts 文件夹截图"></a>kexts 文件夹截图</h1><img src="/2020/09/29/%E5%8D%81%E4%BB%A3%E9%BB%91%E8%8B%B9%E6%9E%9COC%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3%E6%AD%A5%E9%AA%A4/4.png" class="">
+
+
+<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.根据视频教程，直接刷写BASE版本的苹果OC镜像到U盘</span><br><span class="line"></span><br><span class="line">2.根据视频步骤，添加或删除相关的kexts文件，主要是显卡、板载网卡的相关补丁。</span><br><span class="line"></span><br><span class="line">3.重启进入OC，然后使用从互联网上安装macos。</span><br><span class="line"></span><br><span class="line">  Tips：由于在宿舍搞，没有直接可以使用的互联网（在BASE的macos中无法认证校园网。。。。），因此使用了与视频不一样的另一种骚操作：插入另一个刷写有从[黑果小兵](https://blog.daliansky.net/)那里下载的最新镜像的u盘，此时BASE系统将会自动识别，并且可以直接安装。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/05/08/Python%E5%AE%9E%E7%8E%B0Excel%E5%B7%A5%E4%BD%9C%E8%A1%A8%E7%9A%84%E5%88%86%E5%89%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -919,216 +1185,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/08/20/%E6%95%B0%E5%88%97%E6%B1%82%E6%9E%81%E9%99%90%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/20/%E6%95%B0%E5%88%97%E6%B1%82%E6%9E%81%E9%99%90%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">数列求极限的小技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-20 09:36:40" itemprop="dateCreated datePublished" datetime="2019-08-20T09:36:40+08:00">2019-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <br>
-
-
-
-<h2 id="裂项相消法"><a href="#裂项相消法" class="headerlink" title="裂项相消法"></a>裂项相消法</h2><blockquote>
-<p>$\frac{1}{n(n+1)}$</p>
-</blockquote>
-<blockquote>
-<p>$=\frac{1}{n}-\frac{1}{n+1}$</p>
-</blockquote>
-<p>例题：</p>
-<p>$\lim_{n\to\infty} (\frac{1}{2}+\frac{1}{2·3}+…+\frac{1}{n(n+1)})$</p>
-<p>$=\lim_{n\to\infty}(1-\frac{1}{2}+\frac{1}{2}-\frac{1}{3}+…+\frac{1}{n}-\frac{1}{n+1})$</p>
-<p>$=\lim_{n\to\infty}(1-\frac{1}{n+1})=1$</p>
-<h2 id="夹逼定理求数列极限"><a href="#夹逼定理求数列极限" class="headerlink" title="夹逼定理求数列极限"></a>夹逼定理求数列极限</h2><blockquote>
-<p>若函数$F(x)$和函数$G(x)$</p>
-<p>在$x_0$的邻域连续，</p>
-<p>$x\to\ x_0$时极限都为A，</p>
-<p>即$\lim_{x\to x_0} F(x)$</p>
-<p>$=\lim_{x\to x_0} G(x)=A$，</p>
-<p>且在该$x_0$的邻域一直满足$F(x)\leq f(x)\leq G(x)$。</p>
-<p>则当$x\to x_0$时也有</p>
-<p>$\lim_{x\to x_0}F(x)\leq$</p>
-<p>$\lim_{x\to x_0}f(x)\leq$</p>
-<p>$\lim_{x\to x_0}G(x)$</p>
-<p>也就是$A\leq\lim_{x\to x_0}f(x)\leq A$</p>
-<p>所以$\lim_{x\to x_0}f(x)=A$。</p>
-</blockquote>
-<p>例题1：</p>
-<p>$\lim_{n\to\infty}n(\frac{1}{n^2+\pi}+\frac{1}{n^2+2\pi}+…+\frac{1}{n^2+n\pi})$</p>
-<p>解：令$f(x)=$原式</p>
-<p>设$F(x)=\lim_{n\to\infty}n(\frac{1}{n^2+n\pi}+\frac{1}{n^2+n\pi}+…+\frac{1}{n^2+n\pi})$</p>
-<p>$=\lim_{n\to\infty}\frac{n^2}{n^2+n\pi}$</p>
-<p>$G(x)=\lim_{n\to\infty}n(\frac{1}{n^2+\pi}+\frac{1}{n^2+\pi}+…+\frac{1}{n^2+\pi})$</p>
-<p>$=\lim_{n\to\infty}\frac{n^2}{n^2+\pi}$</p>
-<p>$\because$ 函数$F(x)$和函数$G(x)$连续，且满足$F(x)\leq f(x)\leq G(x)$。</p>
-<p>$\therefore$ 根据夹逼定理可知</p>
-<p>$\lim_{x\to x_0}F(x)$</p>
-<p>$=\lim_{x\to x_0}f(x)$</p>
-<p>$=\lim_{x\to x_0}G(x)=1$</p>
-<p>综上所述$\lim_{n\to\infty}n(\frac{1}{n^2+\pi}+\frac{1}{n^2+2\pi}+…+\frac{1}{n^2+n\pi})=1$</p>
-<p>八月一号那天发现忘记了这两个小知识点，故在此记录。。</p>
-<p>求极限<br>$lim_{n\to\infty} \int^1_0 \frac{x^nsin^3x}{1+sin^3x}dx$</p>
-<p>首先考虑<br>$x_n=\frac{sin^3x}{1+sin^3x}$</p>
-<p>$\therefore 0 ≤ x_n ≤1$</p>
-<p>$\therefore 0≤\frac{x^nsin^3x}{1+sin^3x}≤x^n$</p>
-<p>$\because lim_{n\to\infty} \int^1_0 0 dx=lim_{n\to\infty} \int^1_0 x^n dx=0$</p>
-<p>综上所述，由夹逼定理可知，<br>$lim_{n\to\infty} \int^1_0 \frac{x^nsin^3x}{1+sin^3x}dx=0$</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/" class="post-title-link" itemprop="url">常用函数图像</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-18 16:59:38" itemprop="dateCreated datePublished" datetime="2019-08-18T16:59:38+08:00">2019-08-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>80</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="反正弦、反余弦、反正切、反余切"><a href="#反正弦、反余弦、反正切、反余切" class="headerlink" title="反正弦、反余弦、反正切、反余切"></a>反正弦、反余弦、反正切、反余切</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/a.png" class="">
-<h2 id="正割、余割"><a href="#正割、余割" class="headerlink" title="正割、余割"></a>正割、余割</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/0.jpeg" class="">
-<img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/1.png" class="">
-<h2 id="正弦、余弦、正切、余切"><a href="#正弦、余弦、正切、余切" class="headerlink" title="正弦、余弦、正切、余切"></a>正弦、余弦、正切、余切</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/b.jpg" class="">
-<h2 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/c.jpg" class="">
-<h2 id="分式函数、指数函数"><a href="#分式函数、指数函数" class="headerlink" title="分式函数、指数函数"></a>分式函数、指数函数</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/d.jpeg" class="">
-<h2 id="y-x-2-、-y-x-3-、-y-x-4-、-y-sqrt-x"><a href="#y-x-2-、-y-x-3-、-y-x-4-、-y-sqrt-x" class="headerlink" title="$y=x^2$、$y=x^3$、$y=x^4$、$y=\sqrt{x}$"></a>$y=x^2$、$y=x^3$、$y=x^4$、$y=\sqrt{x}$</h2><img src="/2019/08/18/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%9B%BE%E5%83%8F/e.jpeg" class="">
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1236,13 +1292,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">84k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:12</span>
+    <span title="站点阅读时长">1:16</span>
 </div>
 
         

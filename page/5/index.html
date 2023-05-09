@@ -160,6 +160,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/04/23/%E8%AE%B0%E5%BD%95Bootstrap%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/23/%E8%AE%B0%E5%BD%95Bootstrap%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">记录Bootstrap栅格系统的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-23 23:31:00" itemprop="dateCreated datePublished" datetime="2019-04-23T23:31:00+08:00">2019-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+           <br>
+
+<h1 id="起步："><a href="#起步：" class="headerlink" title="起步："></a>起步：</h1><h4 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/">官方文档</a></h4><h4 id="需要引入的js文件"><a href="#需要引入的js文件" class="headerlink" title="需要引入的js文件"></a>需要引入的js文件</h4> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;js/jquery-3.4.0.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/bootstrap.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/bootstrap.css&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="结构分析"><a href="#结构分析" class="headerlink" title="结构分析"></a>结构分析</h1><h4 id="1-布局容器"><a href="#1-布局容器" class="headerlink" title="1.布局容器"></a>1.布局容器</h4><p> <code>Bootstrap </code>需要为页面内容和栅格系统包裹一个 <code>.container</code> 容器。我们提供了两个作此用处的类。注意，由于 padding 等属性的原因，这两种 容器类不能互相嵌套。</p>
+<p><code>.container</code> 类用于固定宽度并支持响应式布局的容器。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>.container-fluid</code> 类用于 100% 宽度，占据全部视口（viewport）的容器。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container-fluid&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="栅格系统"><a href="#栅格系统" class="headerlink" title="栅格系统"></a>栅格系统</h1><p><code>Bootstrap</code> 提供了一套响应式、移动设备优先的流式栅格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。它包含了易于使用的预定义类，还有强大的mixin 用于生成更具语义的布局。</p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>栅格系统用于通过一系列的行<code>（row）</code>与列<code>（column）</code>的组合来创建页面布局，你的内容就可以放入这些创建好的布局中。下面就介绍一下 Bootstrap 栅格系统的工作原理：</p>
+<p>“行（row）”必须包含在 <code>.container </code>（固定宽度）或 <code>.container-fluid </code>（100% 宽度）中，以便为其赋予合适的排列（aligment）和内补（padding）。<br>通过“行（row）”在水平方向创建一组“列（column）”。<br>你的内容应当放置于“列（column）”内，并且，只有“列（column）”可以作为行（row）”的直接子元素。<br>类似 <code>.row</code> 和 <code>.col-xs-4</code> 这种预定义的类，可以用来快速创建栅格布局。<code>Bootstrap </code>源码中定义的 mixin 也可以用来创建语义化的布局。<br>通过为“列（column）”设置 <code>padding </code>属性，从而创建列与列之间的间隔（gutter）。通过为<code> .row</code> 元素设置负值<code> margin</code> 从而抵消掉为 <code>.container </code>元素设置的<code> padding</code>，也就间接为“行（row）”所包含的“列（column）”抵消掉了<code>padding</code>。<br>负值的 <code>margin</code>就是下面的示例为什么是向外突出的原因。在栅格列中的内容排成一行。<br>栅格系统中的列是通过指定1到12的值来表示其跨越的范围。例如，三个等宽的列可以使用三个<code>.col-xs-4</code>来创建。<br>如果一“行（row）”中包含了的“列（column）”大于 12，多余的“列（column）”所在的元素将被作为一个整体另起一行排列。<br>栅格类适用于与屏幕宽度大于或等于分界点大小的设备 ， 并且针对小屏幕设备覆盖栅格类。 因此，在元素上应用任何<code>.col-md-*</code>栅格类适用于与屏幕宽度大于或等于分界点大小的设备 ， 并且针对小屏幕设备覆盖栅格类。 因此，在元素上应用任何<code>.col-lg-*</code>不存在， 也影响大屏幕设备。<br>通过研究后面的实例，可以将这些原理应用到你的代码中。</p>
+<h4 id="实例：从堆叠到水平排列"><a href="#实例：从堆叠到水平排列" class="headerlink" title="实例：从堆叠到水平排列"></a>实例：从堆叠到水平排列</h4><p>使用单一的一组 <code>.col-md-*</code> 栅格类，就可以创建一个基本的栅格系统，在手机和平板设备上一开始是堆叠在一起的（超小屏幕到小屏幕这一范围），在桌面（中等）屏幕设备上变为水平排列。所有“列（column）必须放在 ” <code>.row </code>内。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-1&quot;</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-8&quot;</span>&gt;</span>.col-md-8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-6&quot;</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-6&quot;</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实例：流式布局容器"><a href="#实例：流式布局容器" class="headerlink" title="实例：流式布局容器"></a>实例：流式布局容器</h4><p>将最外面的布局元素 <code>.container </code>修改为 <code>.container-fluid</code>，就可以将固定宽度的栅格布局转换为 100% 宽度的布局。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container-fluid&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="实例：移动设备和桌面屏幕"><a href="#实例：移动设备和桌面屏幕" class="headerlink" title="实例：移动设备和桌面屏幕"></a>实例：移动设备和桌面屏幕</h4><p>是否不希望在小屏幕设备上所有列都堆叠在一起？那就使用针对超小屏幕和中等屏幕设备所定义的类吧，即 <code>.col-xs-* </code>和 <code>.col-md-*</code>。请看下面的实例，研究一下这些是如何工作的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-12 col-md-8&quot;</span>&gt;</span>.col-xs-12 .col-md-8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-md-4&quot;</span>&gt;</span>.col-xs-6 .col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-md-4&quot;</span>&gt;</span>.col-xs-6 .col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-md-4&quot;</span>&gt;</span>.col-xs-6 .col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-md-4&quot;</span>&gt;</span>.col-xs-6 .col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Columns are always 50% wide, on mobile and desktop --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6&quot;</span>&gt;</span>.col-xs-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6&quot;</span>&gt;</span>.col-xs-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实例：手机、平板、桌面"><a href="#实例：手机、平板、桌面" class="headerlink" title="实例：手机、平板、桌面"></a>实例：手机、平板、桌面</h4><p>在上面案例的基础上，通过使用针对平板设备的 .col-sm-* 类，我们来创建更加动态和强大的布局吧。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-12 col-sm-6 col-md-8&quot;</span>&gt;</span>.col-xs-12 .col-sm-6 .col-md-8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-md-4&quot;</span>&gt;</span>.col-xs-6 .col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-sm-4&quot;</span>&gt;</span>.col-xs-6 .col-sm-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-sm-4&quot;</span>&gt;</span>.col-xs-6 .col-sm-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Optional: clear the XS cols if their content doesn&#x27;t match in height --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clearfix visible-xs-block&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-xs-6 col-sm-4&quot;</span>&gt;</span>.col-xs-6 .col-sm-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>具体的就不记了可以去官网看，加油</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/04/13/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/13/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">微信小程序弹性布局</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-13 22:25:28" itemprop="dateCreated datePublished" datetime="2019-04-13T22:25:28+08:00">2019-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <br>
+本帖作为我个人学习整理笔记。非原创。转自：https://www.jianshu.com/p/c375f1f9720d
+
+
+<h1 id="一、Flex-布局是什么？"><a href="#一、Flex-布局是什么？" class="headerlink" title="一、Flex 布局是什么？"></a>一、Flex 布局是什么？</h1><h4 id="Flex-是-Flexible-Box-的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为-Flex-布局。行内元素也可以使用-Flex-布局。Webkit-内核的浏览器，必须加上-webkit前缀。注意，设为-Flex-布局以后，子元素的float、clear和vertical-align属性将失效。"><a href="#Flex-是-Flexible-Box-的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为-Flex-布局。行内元素也可以使用-Flex-布局。Webkit-内核的浏览器，必须加上-webkit前缀。注意，设为-Flex-布局以后，子元素的float、clear和vertical-align属性将失效。" class="headerlink" title="Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为 Flex 布局。行内元素也可以使用 Flex 布局。Webkit 内核的浏览器，必须加上-webkit前缀。注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。"></a>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为 Flex 布局。行内元素也可以使用 Flex 布局。Webkit 内核的浏览器，必须加上-webkit前缀。注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</h4><h1 id="二、基本概念采用-Flex-布局的元素，称为-Flex-容器（flex-container），简称”容器”。它的所有子元素自动成为容器成员，称为-Flex-项目（flex-item），简称”项目”。"><a href="#二、基本概念采用-Flex-布局的元素，称为-Flex-容器（flex-container），简称”容器”。它的所有子元素自动成为容器成员，称为-Flex-项目（flex-item），简称”项目”。" class="headerlink" title="二、基本概念采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。"></a>二、基本概念采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</h1>
+<h4 id="容器默认存在两根轴：水平的主轴（main-axis）和垂直的交叉轴（cross-axis）。主轴的开始位置（与边框的交叉点）叫做main-start，结束位置叫做main-end；交叉轴的开始位置叫做cross-start，结束位置叫做cross-end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main-size，占据的交叉轴空间叫做cross-size。"><a href="#容器默认存在两根轴：水平的主轴（main-axis）和垂直的交叉轴（cross-axis）。主轴的开始位置（与边框的交叉点）叫做main-start，结束位置叫做main-end；交叉轴的开始位置叫做cross-start，结束位置叫做cross-end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main-size，占据的交叉轴空间叫做cross-size。" class="headerlink" title="容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。"></a>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</h4><h1 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h1><h2 id="以下6个属性设置在容器上。"><a href="#以下6个属性设置在容器上。" class="headerlink" title="以下6个属性设置在容器上。"></a>以下6个属性设置在容器上。</h2><h3 id="3-1-flex-direction属性"><a href="#3-1-flex-direction属性" class="headerlink" title="3.1 flex-direction属性"></a>3.1 flex-direction属性</h3><h4 id="flex-direction属性决定主轴的方向（即项目的排列方向）。"><a href="#flex-direction属性决定主轴的方向（即项目的排列方向）。" class="headerlink" title="flex-direction属性决定主轴的方向（即项目的排列方向）。"></a>flex-direction属性决定主轴的方向（即项目的排列方向）。</h4>
+<h4 id="它可能有4个值。"><a href="#它可能有4个值。" class="headerlink" title="它可能有4个值。"></a>它可能有4个值。</h4><h2 id="3-2-flex-wrap属性"><a href="#3-2-flex-wrap属性" class="headerlink" title="3.2 flex-wrap属性"></a>3.2 flex-wrap属性</h2><h4 id="默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。"><a href="#默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。" class="headerlink" title="默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。"></a>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</h4>
+
+<h4 id="它可能取三个值。"><a href="#它可能取三个值。" class="headerlink" title="它可能取三个值。"></a>它可能取三个值。</h4><h3 id="（1）nowrap（默认）：不换行。"><a href="#（1）nowrap（默认）：不换行。" class="headerlink" title="（1）nowrap（默认）：不换行。"></a>（1）nowrap（默认）：不换行。</h3>
+<h3 id="（2）wrap：换行，第一行在上方。"><a href="#（2）wrap：换行，第一行在上方。" class="headerlink" title="（2）wrap：换行，第一行在上方。"></a>（2）wrap：换行，第一行在上方。</h3>
+<h3 id="（3）wrap-reverse：换行，第一行在下方。"><a href="#（3）wrap-reverse：换行，第一行在下方。" class="headerlink" title="（3）wrap-reverse：换行，第一行在下方。"></a>（3）wrap-reverse：换行，第一行在下方。</h3>
+<h2 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h2><h4 id="flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row-nowrap。"><a href="#flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row-nowrap。" class="headerlink" title="flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。"></a>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</h4><h2 id="3-4-justify-content属性"><a href="#3-4-justify-content属性" class="headerlink" title="3.4 justify-content属性"></a>3.4 justify-content属性</h2><h4 id="justify-content属性定义了项目在主轴上的对齐方式。"><a href="#justify-content属性定义了项目在主轴上的对齐方式。" class="headerlink" title="justify-content属性定义了项目在主轴上的对齐方式。"></a>justify-content属性定义了项目在主轴上的对齐方式。</h4>
+<h4 id="它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。"><a href="#它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。" class="headerlink" title="它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。"></a>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</h4><h2 id="3-5-align-items属性"><a href="#3-5-align-items属性" class="headerlink" title="3.5 align-items属性"></a>3.5 align-items属性</h2><h4 id="align-items属性定义项目在交叉轴上如何对齐。"><a href="#align-items属性定义项目在交叉轴上如何对齐。" class="headerlink" title="align-items属性定义项目在交叉轴上如何对齐。"></a>align-items属性定义项目在交叉轴上如何对齐。</h4>
+<h4 id="它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。"><a href="#它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。" class="headerlink" title="它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。"></a>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</h4><h2 id="3-6-align-content属性"><a href="#3-6-align-content属性" class="headerlink" title="3.6 align-content属性"></a>3.6 align-content属性</h2><h4 id="align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。"><a href="#align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。" class="headerlink" title="align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。"></a>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</h4>
+<h4 id="该属性可能取6个值。"><a href="#该属性可能取6个值。" class="headerlink" title="该属性可能取6个值。"></a>该属性可能取6个值。</h4><h1 id="四、项目的属性"><a href="#四、项目的属性" class="headerlink" title="四、项目的属性"></a>四、项目的属性</h1><h4 id="以下6个属性设置在项目上。"><a href="#以下6个属性设置在项目上。" class="headerlink" title="以下6个属性设置在项目上。"></a>以下6个属性设置在项目上。</h4><h2 id="4-1-order属性"><a href="#4-1-order属性" class="headerlink" title="4.1 order属性"></a>4.1 order属性</h2><h4 id="order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。"><a href="#order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。" class="headerlink" title="order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。"></a>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</h4>
+
+<h1 id="4-2-flex-grow属性"><a href="#4-2-flex-grow属性" class="headerlink" title="4.2 flex-grow属性"></a>4.2 flex-grow属性</h1><h4 id="flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。"><a href="#flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。" class="headerlink" title="flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。"></a>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</h4>
+
+<h4 id="如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。"><a href="#如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。" class="headerlink" title="如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。"></a>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。</h4><h4 id="如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。"><a href="#如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。" class="headerlink" title="如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。"></a>如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</h4><h1 id="4-3-flex-shrink属性flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。"><a href="#4-3-flex-shrink属性flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。" class="headerlink" title="4.3 flex-shrink属性flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。"></a>4.3 flex-shrink属性flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</h1>
+
+<h4 id="如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。"><a href="#如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。" class="headerlink" title="如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。"></a>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。</h4><h1 id="4-4-flex-basis"><a href="#4-4-flex-basis" class="headerlink" title="4.4 flex-basis"></a>4.4 flex-basis</h1><h4 id="属性flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main-size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。"><a href="#属性flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main-size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。" class="headerlink" title="属性flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。"></a>属性flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</h4><h1 id="4-5-flex属性"><a href="#4-5-flex属性" class="headerlink" title="4.5 flex属性"></a>4.5 flex属性</h1><h4 id="flex属性是flex-grow-flex-shrink-和-flex-basis的简写，默认值为0-1-auto。后两个属性可选。该属性有两个快捷值：auto-1-1-auto-和-none-0-0-auto-。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。"><a href="#flex属性是flex-grow-flex-shrink-和-flex-basis的简写，默认值为0-1-auto。后两个属性可选。该属性有两个快捷值：auto-1-1-auto-和-none-0-0-auto-。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。" class="headerlink" title="flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。"></a>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</h4><h1 id="4-6-align-self属性"><a href="#4-6-align-self属性" class="headerlink" title="4.6 align-self属性"></a>4.6 align-self属性</h1><h4 id="align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。"><a href="#align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。" class="headerlink" title="align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。"></a>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</h4>
+<h4 id="该属性可能取6个值，除了auto，其他都与align-items属性完全一致。"><a href="#该属性可能取6个值，除了auto，其他都与align-items属性完全一致。" class="headerlink" title="该属性可能取6个值，除了auto，其他都与align-items属性完全一致。"></a>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/04/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%ADcanvas%E7%BB%84%E4%BB%B6%E6%97%A0%E6%B3%95%E8%A2%AB%E8%A6%86%E7%9B%96%E7%9A%84%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -905,185 +1107,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/03/17/%E4%BD%BF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E9%9F%B3%E5%93%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/17/%E4%BD%BF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E9%9F%B3%E5%93%8D/" class="post-title-link" itemprop="url">使用树莓派打造局域网音响</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-17 14:32:10" itemprop="dateCreated datePublished" datetime="2019-03-17T14:32:10+08:00">2019-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>858</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <br>
-
-<h3 id="在学校实验室里有一台功放，手里正好有一台树莓派，便萌生了这个想法。"><a href="#在学校实验室里有一台功放，手里正好有一台树莓派，便萌生了这个想法。" class="headerlink" title="在学校实验室里有一台功放，手里正好有一台树莓派，便萌生了这个想法。"></a>在学校实验室里有一台功放，手里正好有一台树莓派，便萌生了这个想法。</h3><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install git</span><br></pre></td></tr></table></figure>
-<h2 id="2-下载并编译"><a href="#2-下载并编译" class="headerlink" title="2.下载并编译"></a>2.下载并编译</h2><h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源"></a>配置源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.chiark.greenend.org.uk/~christi/debian/christi@coraline.org.gpg.key</span><br><span class="line"></span><br><span class="line">vim /etc/apt/sources.list.d/upnprender.list</span><br><span class="line"></span><br><span class="line">deb http://www.chiark.greenend.org.uk/~christi/debian/ wheezy main</span><br><span class="line"></span><br><span class="line">apt update</span><br></pre></td></tr></table></figure>
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install libupnp-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-alsa</span><br></pre></td></tr></table></figure>
-<h3 id="下载github项目"><a href="#下载github项目" class="headerlink" title="下载github项目"></a>下载github项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hzeller/gmrender-resurrect.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> gmrender-resurrect</span><br></pre></td></tr></table></figure>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt-get install autoconf</span><br><span class="line"></span><br><span class="line">./autogen.sh</span><br><span class="line"></span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line">make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="安装gmediarender"><a href="#安装gmediarender" class="headerlink" title="安装gmediarender"></a>安装gmediarender</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install gmediarender</span><br></pre></td></tr></table></figure>
-<h3 id="至此安装完成"><a href="#至此安装完成" class="headerlink" title="至此安装完成"></a>至此安装完成</h3><h3 id="启动命令："><a href="#启动命令：" class="headerlink" title="启动命令："></a>启动命令：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gmediarender -I 192.168.1.146 -f <span class="string">&quot;Pi&quot;</span></span><br></pre></td></tr></table></figure>
-<h3 id="添加开机自启-（注意：要写在exit-0前一行）"><a href="#添加开机自启-（注意：要写在exit-0前一行）" class="headerlink" title="添加开机自启 （注意：要写在exit 0前一行）"></a>添加开机自启 （注意：要写在exit 0前一行）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rc.local</span><br></pre></td></tr></table></figure>
-<p>接下来让我们high起来</p>
-<h1 id="使用截图"><a href="#使用截图" class="headerlink" title="使用截图"></a>使用截图</h1><img src="/2019/03/17/%E4%BD%BF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E9%9F%B3%E5%93%8D/1.png" class="">
-<h1 id="附上一张高清无码的实物图"><a href="#附上一张高清无码的实物图" class="headerlink" title="附上一张高清无码的实物图"></a>附上一张高清无码的实物图</h1><img src="/2019/03/17/%E4%BD%BF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E9%9F%B3%E5%93%8D/2.jpg" class="">
-<h1 id="一些测试树莓派音频的命令"><a href="#一些测试树莓派音频的命令" class="headerlink" title="一些测试树莓派音频的命令"></a>一些测试树莓派音频的命令</h1><h3 id="测试树莓派音频输出"><a href="#测试树莓派音频输出" class="headerlink" title="测试树莓派音频输出"></a>测试树莓派音频输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo speaker-test -t sine</span><br></pre></td></tr></table></figure>
-<h3 id="如果听到-嘟嘟嘟嘟……-表示音频输出正常，音量大小可以通过alsamixer来调节，使用上下键来调节。"><a href="#如果听到-嘟嘟嘟嘟……-表示音频输出正常，音量大小可以通过alsamixer来调节，使用上下键来调节。" class="headerlink" title="如果听到 嘟嘟嘟嘟…….. 表示音频输出正常，音量大小可以通过alsamixer来调节，使用上下键来调节。"></a>如果听到 嘟嘟嘟嘟…….. 表示音频输出正常，音量大小可以通过alsamixer来调节，使用上下键来调节。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alsamixer</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/" class="post-title-link" itemprop="url">树莓派的第一步</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-17 12:48:11" itemprop="dateCreated datePublished" datetime="2019-03-17T12:48:11+08:00">2019-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>461</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <br>
-
-<h3 id="记录一些树莓派的初始配置操作"><a href="#记录一些树莓派的初始配置操作" class="headerlink" title="记录一些树莓派的初始配置操作"></a>记录一些树莓派的初始配置操作</h3><h1 id="刷写"><a href="#刷写" class="headerlink" title="刷写"></a>刷写</h1><h2 id="树莓派官网"><a href="#树莓派官网" class="headerlink" title="树莓派官网"></a><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspbian/">树莓派官网</a></h2><h2 id="刷写工具：-Ether"><a href="#刷写工具：-Ether" class="headerlink" title="刷写工具： Ether"></a><a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">刷写工具： Ether</a></h2><img src="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/1.png" class="">
-<img src="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/2.png" class="">
-<h1 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h1><h2 id="树莓派默认开机后是pi用户，在图形界面设置pi用户的密码。"><a href="#树莓派默认开机后是pi用户，在图形界面设置pi用户的密码。" class="headerlink" title="树莓派默认开机后是pi用户，在图形界面设置pi用户的密码。"></a>树莓派默认开机后是pi用户，在图形界面设置pi用户的密码。</h2><h2 id="使用sudo-passwd-root为root用户设置密码"><a href="#使用sudo-passwd-root为root用户设置密码" class="headerlink" title="使用sudo passwd root为root用户设置密码"></a>使用<code>sudo passwd root</code>为root用户设置密码</h2><h2 id="启动ssh服务"><a href="#启动ssh服务" class="headerlink" title="启动ssh服务"></a>启动ssh服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start ssh</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> ssh</span><br></pre></td></tr></table></figure>
-<h2 id="开启vnc功能"><a href="#开启vnc功能" class="headerlink" title="开启vnc功能"></a>开启vnc功能</h2><h3 id="sudo-raspi-config"><a href="#sudo-raspi-config" class="headerlink" title="sudo raspi-config"></a><code>sudo raspi-config</code></h3><img src="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/3.png" class="">
-<h3 id="选择“5-Interfacing-Options”，回车"><a href="#选择“5-Interfacing-Options”，回车" class="headerlink" title="选择“5 Interfacing Options”，回车"></a>选择“5 Interfacing Options”，回车</h3><img src="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/4.png" class="">
-<h3 id="选择是-连接即可"><a href="#选择是-连接即可" class="headerlink" title="选择是 连接即可"></a>选择是 连接即可</h3><img src="/2019/03/17/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5/5.png" class="">
-<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><h2 id="配置国内软件源（stretch）-修改-etc-apt-sources-list-d-raspi-list"><a href="#配置国内软件源（stretch）-修改-etc-apt-sources-list-d-raspi-list" class="headerlink" title="配置国内软件源（stretch） 修改/etc/apt/sources.list.d/raspi.list"></a>配置国内软件源（stretch） 修改<code>/etc/apt/sources.list.d/raspi.list</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main non-free contrib</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ stretch main non-free contrib</span><br></pre></td></tr></table></figure>
-<h2 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1191,13 +1214,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">84k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:12</span>
+    <span title="站点阅读时长">1:16</span>
 </div>
 
         

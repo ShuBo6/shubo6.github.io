@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shubo6.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IP 地址定义   节点名称 IP地址    ubuntu22-4-node0&#x2F;master 192.168.123.20   ubuntu22-4-node1 192.168.123.21   ubuntu22-4-node2 192.168.123.22   预准备初始环境创建虚拟机实例  使用Ubuntu22.4.2Iso镜像文件创建虚拟机先创建一个实例，将初始化k8s集群前的预准备工作做完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用containerd+kubeadm在虚拟机中创建伪多节点集群">
+<meta property="og:url" content="https://shubo6.github.io/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:site_name" content="shubo的博客">
+<meta property="og:description" content="IP 地址定义   节点名称 IP地址    ubuntu22-4-node0&#x2F;master 192.168.123.20   ubuntu22-4-node1 192.168.123.21   ubuntu22-4-node2 192.168.123.22   预准备初始环境创建虚拟机实例  使用Ubuntu22.4.2Iso镜像文件创建虚拟机先创建一个实例，将初始化k8s集群前的预准备工作做完">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shubo6.github.io/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/1.jpg">
+<meta property="article:published_time" content="2023-05-07T16:10:20.000Z">
+<meta property="article:modified_time" content="2023-05-09T05:59:17.454Z">
+<meta property="article:author" content="shubo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shubo6.github.io/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/1.jpg">
+
+<link rel="canonical" href="https://shubo6.github.io/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用containerd+kubeadm在虚拟机中创建伪多节点集群 | shubo的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shubo的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">在记录中见证自己的成长。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="庆幸我还年轻，我要记录我的成长之路。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用containerd+kubeadm在虚拟机中创建伪多节点集群
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-08 00:10:20" itemprop="dateCreated datePublished" datetime="2023-05-08T00:10:20+08:00">2023-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-09 13:59:17" itemprop="dateModified" datetime="2023-05-09T13:59:17+08:00">2023-05-09</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="IP-地址定义"><a href="#IP-地址定义" class="headerlink" title="IP 地址定义"></a>IP 地址定义</h1><table>
+<thead>
+<tr>
+<th>节点名称</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ubuntu22-4-node0/master</td>
+<td>192.168.123.20</td>
+</tr>
+<tr>
+<td>ubuntu22-4-node1</td>
+<td>192.168.123.21</td>
+</tr>
+<tr>
+<td>ubuntu22-4-node2</td>
+<td>192.168.123.22</td>
+</tr>
+</tbody></table>
+<h1 id="预准备初始环境"><a href="#预准备初始环境" class="headerlink" title="预准备初始环境"></a>预准备初始环境</h1><h2 id="创建虚拟机实例"><a href="#创建虚拟机实例" class="headerlink" title="创建虚拟机实例"></a>创建虚拟机实例</h2><img src="/2023/05/08/%E4%BD%BF%E7%94%A8kubeadm-%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BC%AA%E5%A4%9A%E8%8A%82%E7%82%B9%E9%9B%86%E7%BE%A4/1.jpg" class="">
+
+<p>使用Ubuntu22.4.2Iso镜像文件创建虚拟机<br>先创建一个实例，将初始化k8s集群前的预准备工作做完后使用虚拟机克隆功能复制为三个实例即可。</p>
+<h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 配置节点名</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo hostnamectl set-hostname ubuntu22-4-node0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo vim /etc/hosts</span></span><br><span class="line">192.168.123.20 ubuntu22-4-node0</span><br><span class="line">192.168.123.21 ubuntu22-4-node1</span><br><span class="line">192.168.123.22 ubuntu22-4-node2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭swap; 注释/etc/fstab文件的最后一行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo sed -i <span class="string">&#x27;/swap/s/^/#/&#x27;</span> /etc/fstab</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启IPv4转发</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span></span><br><span class="line">overlay</span><br><span class="line">br_netfilter</span><br><span class="line">EOF</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="string"> modprobe overlay</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="string"> modprobe br_netfilter</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="string"> sudo cat &lt;&lt;EOF</span> | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line">net.bridge.bridge-nf-call-iptables  = 1</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.ipv4.ip_forward                 = 1</span><br><span class="line">EOF</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo sysctl --system</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装containerd"><a href="#安装containerd" class="headerlink" title="安装containerd"></a>安装containerd</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -<span class="comment"># -O  https://mirrors.aliyun.com/docker-ce/linux/ubuntu/dists/jammy/pool/stable/amd64/containerd.io_1.6.9-1_amd64.deb</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo dpkg -i containerd.io_1.6.9-1_amd64.deb</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">导出默认配置</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo mkdir -p /etc/containerd/</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo containerd config default &gt; /etc/containerd/config.toml</span></span><br><span class="line"><span class="meta">#</span><span class="bash">编辑配置文件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo vim /etc/containerd/config.toml</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改</span></span><br><span class="line">[plugins]</span><br><span class="line">  [plugins.&quot;io.containerd.grpc.v1.cri&quot;]</span><br><span class="line">    sandbox_image = &quot;registry.aliyuncs.com/google_containers/pause:3.6&quot;</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置 systemd cgroup 驱动</span> </span><br><span class="line">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd.runtimes.runc]</span><br><span class="line">  ...</span><br><span class="line">  [plugins.&quot;io.containerd.grpc.v1.cri&quot;.containerd.runtimes.runc.options]</span><br><span class="line">    SystemdCgroup = true</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置镜像加速</span></span><br><span class="line">[plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry]</span><br><span class="line">      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors]</span><br><span class="line">        [plugins. &quot;io.contianerd.grpc.v1.cri&quot;.registry.mirrors.&quot;docker.io&quot;]</span><br><span class="line">          endpoint = [&quot;https://registry.aliyuncs.com&quot;]</span><br><span class="line"></span><br><span class="line">:wq</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开机自启/重启containerd服务</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">enable</span> containerd</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl restart containerd</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装依赖组件"><a href="#安装依赖组件" class="headerlink" title="安装依赖组件"></a>安装依赖组件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install -y apt-transport-https ca-certificates curl</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置GPG文件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg  https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo <span class="built_in">echo</span> <span class="string">&quot;deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] http://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial main&quot;</span> | sudo tee /etc/apt/sources.list.d/kubernetes.list</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装kubelet、kubeadm、kubectl</span></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y kubelet=1.25.0-00 kubeadm=1.25.0-00 kubectl=1.25.0-00</span><br><span class="line"><span class="meta">#</span><span class="bash"> 标记软件包,固定版本</span></span><br><span class="line">sudo apt-mark hold kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展虚拟机实例"><a href="#扩展虚拟机实例" class="headerlink" title="扩展虚拟机实例"></a>扩展虚拟机实例</h2><blockquote>
+<p>以上操作完成后可以手动创建一个虚拟机快照，方便后边玩崩了回滚(可选)</p>
+</blockquote>
+<p>使用PVE的虚拟机克隆功能将虚拟机实例<code>ubuntu22-4-node0</code>复制为三个实例。</p>
+<p>复制完成后开机，修改主机名以及对应的ip地址<br>ubuntu22-4-node1 -&gt; 192.168.123.21<br>ubuntu22-4-node2 -&gt; 192.168.123.22</p>
+<h2 id="为三台虚拟机开启ssh互信（可选）"><a href="#为三台虚拟机开启ssh互信（可选）" class="headerlink" title="为三台虚拟机开启ssh互信（可选）"></a>为三台虚拟机开启ssh互信（可选）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shubo@ubuntu-node2:~$ ssh-keygen</span><br><span class="line">shubo@ubuntu-node2:~$ ssh-copy-id shubo@192.168.123.1x # 此操作在每个节点都执行一遍</span><br></pre></td></tr></table></figure>
+<h1 id="使用kubeadm初始化集群"><a href="#使用kubeadm初始化集群" class="headerlink" title="使用kubeadm初始化集群"></a>使用kubeadm初始化集群</h1><p>在 ubuntu22-4-node1/master 执行: </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo kubeadm init \</span></span><br><span class="line"><span class="bash">--kubernetes-version=v1.25.0 \</span></span><br><span class="line"><span class="bash">--image-repository registry.aliyuncs.com/google_containers \</span></span><br><span class="line"><span class="bash">--service-cidr=10.96.0.0/12 \</span></span><br><span class="line"><span class="bash">--pod-network-cidr=10.244.0.0/16 \</span></span><br><span class="line"><span class="bash">--cri-socket unix:///run/containerd/containerd.sock \</span></span><br><span class="line"><span class="bash">--v=5</span></span><br></pre></td></tr></table></figure>
+
+<p>初始化完成后会得到一个token</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line">Alternatively, if you are the root user, you can run:</span><br><span class="line"></span><br><span class="line">  export KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 192.168.123.20:6443 --token l0qicb.ztul7i1t5ihrtb6b \</span><br><span class="line">	--discovery-token-ca-cert-hash sha256:08d420cf2aa0984a81849933e31ea5ff5d09d7bc4327404f54d55fde16bd3e7e</span><br></pre></td></tr></table></figure>
+<p>在ubuntu22-4-node1,ubuntu22-4-node2 分别执行:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kubeadm join 192.168.123.20:6443 --token l0qicb.ztul7i1t5ihrtb6b         --discovery-token-ca-cert-hash sha256:08d420cf2aa0984a81849933e31ea5ff5d09d7bc4327404f54d55fde16bd3e7e --cri-socket unix:///run/containerd/containerd.sock</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装网络插件flannel"><a href="#安装网络插件flannel" class="headerlink" title="安装网络插件flannel"></a>安装网络插件flannel</h1><p>此时集群初始化基本就完成了，通过<code>kubectl get nodes</code>命令可以看到node都处于not Ready的状态。这是因为还未安装任何网络插件。</p>
+<p>安装flannel</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://ghproxy.com/https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo kubectl apply -f kube-flannel.yml</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="cluster-初始化完成"><a href="#cluster-初始化完成" class="headerlink" title="cluster 初始化完成"></a>cluster 初始化完成</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shubo@ubuntu22-4-node0:~$ kubectl get nodes</span><br><span class="line">NAME               STATUS   ROLES           AGE   VERSION</span><br><span class="line">ubuntu22-4-node0   Ready    control-plane   54m   v1.25.0</span><br><span class="line">ubuntu22-4-node1   Ready    &lt;none&gt;          43m   v1.25.0</span><br><span class="line">ubuntu22-4-node2   Ready    &lt;none&gt;          42m   v1.25.0</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/07/Lab-Server-%E4%BB%8B%E7%BB%8D/" rel="prev" title="Lab Server 介绍">
+      <i class="fa fa-chevron-left"></i> Lab Server 介绍
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+        
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-%E5%9C%B0%E5%9D%80%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">IP 地址定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%87%86%E5%A4%87%E5%88%9D%E5%A7%8B%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">预准备初始环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">创建虚拟机实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">前置准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85containerd"><span class="nav-number">2.3.</span> <span class="nav-text">安装containerd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E7%BB%84%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">安装依赖组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.5.</span> <span class="nav-text">扩展虚拟机实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%B8%89%E5%8F%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%BC%80%E5%90%AFssh%E4%BA%92%E4%BF%A1%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">为三台虚拟机开启ssh互信（可选）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8kubeadm%E5%88%9D%E5%A7%8B%E5%8C%96%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">使用kubeadm初始化集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6flannel"><span class="nav-number">4.</span> <span class="nav-text">安装网络插件flannel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cluster-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%8C%E6%88%90"><span class="nav-number">5.</span> <span class="nav-text">cluster 初始化完成</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+  
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">shubo</p>
+  <div class="site-description" itemprop="description">庆幸我还年轻，我要记录我的成长之路。</div>
+</div>
+
+
+
+      </div>
+      <div id="music163player">
+             <!--
+             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=5041667&auto=1&height=66"></iframe>
+            -->
+            典中典之音乐播放器
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1856401242&auto=0&height=66"></iframe>
+          </iframe>
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shubo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">84k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:16</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+</body>
+</html>
