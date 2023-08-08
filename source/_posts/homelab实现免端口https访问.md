@@ -4,7 +4,7 @@ date: 2023-08-08 15:58:46
 tags:
 ---
 
-了解到cloudflare强大的转发功能很长时间了。前段时间脑子一热就入了一个cloudflare的域名。这次再来补一下关于https的免端口访问步骤。
+了解到cloudflare强大的转发功能很长时间了。前段时间脑子一热就入了一个cloudflare的域名。今天正好遇到了必须免端口访问的需求。这次再来补一下关于https的免端口访问步骤。
 
 前提：
 * 有公网IP
@@ -49,3 +49,4 @@ selefra-baseapi.shubolab.com.	1	IN	CNAME	home.shubolab.com.
 
 
  
+ > 到此配置就完成了。注意此域名配置的http服务只是在我电脑本地做代码调试的时候会临时开启。各位师傅就不要打了，不是常开的服务。
