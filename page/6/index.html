@@ -158,6 +158,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8Pycharm%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8Pycharm%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">第一次使用Pycharm遇见的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-19 00:31:26" itemprop="dateCreated datePublished" datetime="2019-03-19T00:31:26+08:00">2019-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>352</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <br>
+
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="今天第一次使用pycharm时添加第三方库时，遇见了一个错误：ModuleNotFoundError-No-module-named-39-setuptools-39"><a href="#今天第一次使用pycharm时添加第三方库时，遇见了一个错误：ModuleNotFoundError-No-module-named-39-setuptools-39" class="headerlink" title="今天第一次使用pycharm时添加第三方库时，遇见了一个错误：ModuleNotFoundError: No module named &#39;setuptools&#39;"></a>今天第一次使用pycharm时添加第三方库时，遇见了一个错误：<code>ModuleNotFoundError: No module named &#39;setuptools&#39;</code></h2><h2 id="该问题是由于Python默认是没有安装setuptools这个模块的，这也是一个第三方模块。"><a href="#该问题是由于Python默认是没有安装setuptools这个模块的，这也是一个第三方模块。" class="headerlink" title="该问题是由于Python默认是没有安装setuptools这个模块的，这也是一个第三方模块。"></a>该问题是由于Python默认是没有安装setuptools这个模块的，这也是一个第三方模块。</h2><h2 id="使用pip-install-setuptools即可解决。"><a href="#使用pip-install-setuptools即可解决。" class="headerlink" title="使用pip install setuptools即可解决。"></a>使用<code>pip install setuptools</code>即可解决。</h2><h2 id="然鹅。。。"><a href="#然鹅。。。" class="headerlink" title="然鹅。。。"></a>然鹅。。。</h2><h2 id="pip命令无法使用"><a href="#pip命令无法使用" class="headerlink" title="pip命令无法使用"></a>pip命令无法使用</h2>
+
+<h2 id="首先排除环境变量的问题，安装过程中勾选了add-to-path。故环境变量是没有问题的。"><a href="#首先排除环境变量的问题，安装过程中勾选了add-to-path。故环境变量是没有问题的。" class="headerlink" title="首先排除环境变量的问题，安装过程中勾选了add to path。故环境变量是没有问题的。"></a>首先排除环境变量的问题，安装过程中勾选了add to path。故环境变量是没有问题的。</h2><h3 id="环境变量如图："><a href="#环境变量如图：" class="headerlink" title="环境变量如图："></a>环境变量如图：</h3>
+
+<h2 id="此时打开script文件夹发现文件夹是空的，所以pip肯定是无法使用的"><a href="#此时打开script文件夹发现文件夹是空的，所以pip肯定是无法使用的" class="headerlink" title="此时打开script文件夹发现文件夹是空的，所以pip肯定是无法使用的"></a>此时打开script文件夹发现文件夹是空的，所以pip肯定是无法使用的</h2>
+
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="使用-python-m-ensurepip-命令"><a href="#使用-python-m-ensurepip-命令" class="headerlink" title="使用 python -m ensurepip 命令"></a>使用 <code>python -m ensurepip</code> 命令</h2>
+
+<h2 id="可以看到此时已经出现了pip3的可执行exe文件"><a href="#可以看到此时已经出现了pip3的可执行exe文件" class="headerlink" title="可以看到此时已经出现了pip3的可执行exe文件"></a>可以看到此时已经出现了pip3的可执行exe文件</h2>
+
+<h2 id="如果提示版本更新如下图"><a href="#如果提示版本更新如下图" class="headerlink" title="如果提示版本更新如下图"></a>如果提示版本更新如下图</h2>
+
+<h2 id="则执行-python-m-pip-install-upgrade-pip即可"><a href="#则执行-python-m-pip-install-upgrade-pip即可" class="headerlink" title="则执行 python -m pip install --upgrade pip即可"></a>则执行 <code>python -m pip install --upgrade pip</code>即可</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/03/17/%E4%BD%BF%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E5%B1%80%E5%9F%9F%E7%BD%91%E9%9F%B3%E5%93%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -962,143 +1054,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/01/17/%E8%AE%B0%E5%BD%95frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/17/%E8%AE%B0%E5%BD%95frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="post-title-link" itemprop="url">记录frp内网穿透</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-17 22:29:50" itemprop="dateCreated datePublished" datetime="2019-01-17T22:29:50+08:00">2019-01-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <br>
-
-<h3 id="最近对内网穿透十分感兴趣。通过内网穿透可以实现使内网的设备被外部访问。"><a href="#最近对内网穿透十分感兴趣。通过内网穿透可以实现使内网的设备被外部访问。" class="headerlink" title="最近对内网穿透十分感兴趣。通过内网穿透可以实现使内网的设备被外部访问。"></a>最近对内网穿透十分感兴趣。通过内网穿透可以实现使内网的设备被外部访问。</h3><h3 id="frp这个工具相当强大。获取地址：https-github-com-fatedier-frp"><a href="#frp这个工具相当强大。获取地址：https-github-com-fatedier-frp" class="headerlink" title="frp这个工具相当强大。获取地址：https://github.com/fatedier/frp"></a>frp这个工具相当强大。获取地址：<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">https://github.com/fatedier/frp</a></h3><h3 id="由于手头的设备经常要变动所以，最近重复配置了多次frp。步骤倒是简单，好记性不如烂笔头。下边开始："><a href="#由于手头的设备经常要变动所以，最近重复配置了多次frp。步骤倒是简单，好记性不如烂笔头。下边开始：" class="headerlink" title="由于手头的设备经常要变动所以，最近重复配置了多次frp。步骤倒是简单，好记性不如烂笔头。下边开始："></a>由于手头的设备经常要变动所以，最近重复配置了多次frp。步骤倒是简单，好记性不如烂笔头。下边开始：</h3><br>
-
-<h2 id="1、首先是frpserver端："><a href="#1、首先是frpserver端：" class="headerlink" title="1、首先是frpserver端："></a>1、首先是frpserver端：</h2><h3 id="在git上获取项目通过ftp上传到你的云主机或者使用命令下载你需要的版本："><a href="#在git上获取项目通过ftp上传到你的云主机或者使用命令下载你需要的版本：" class="headerlink" title="在git上获取项目通过ftp上传到你的云主机或者使用命令下载你需要的版本："></a>在git上获取项目通过ftp上传到你的云主机或者使用命令下载你需要的版本：</h3>
-
-<h3 id="我的服务端是我的腾讯云主机-centos7-64位系统-所以在这里选择amd64版本"><a href="#我的服务端是我的腾讯云主机-centos7-64位系统-所以在这里选择amd64版本" class="headerlink" title="我的服务端是我的腾讯云主机 centos7 64位系统 所以在这里选择amd64版本"></a>我的服务端是我的腾讯云主机 centos7 64位系统 所以在这里选择amd64版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.23.1/frp_0.23.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="下载完成后解压"><a href="#下载完成后解压" class="headerlink" title="下载完成后解压"></a>下载完成后解压</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf xxxxx.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入解压后的目录"><a href="#进入解压后的目录" class="headerlink" title="进入解压后的目录"></a>进入解压后的目录</h3>
-
-<h3 id="可以看到对应的有-frpc-、frps、frpc-ini、frps-ini这几个主要文件"><a href="#可以看到对应的有-frpc-、frps、frpc-ini、frps-ini这几个主要文件" class="headerlink" title="可以看到对应的有 frpc 、frps、frpc.ini、frps.ini这几个主要文件"></a>可以看到对应的有 frpc 、frps、frpc.ini、frps.ini这几个主要文件</h3><h3 id="在这里作为server端所以我只需要修改frps-ini这个文件"><a href="#在这里作为server端所以我只需要修改frps-ini这个文件" class="headerlink" title="在这里作为server端所以我只需要修改frps.ini这个文件"></a>在这里作为server端所以我只需要修改frps.ini这个文件</h3>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 65534                <span class="comment">#frps服务绑定的端口号</span></span><br><span class="line">dashboard_port = 65533       <span class="comment">#frps监视页面的端口号</span></span><br><span class="line">dashboard_user = admin       <span class="comment">#frps监视页面的登陆用户名</span></span><br><span class="line">dashboard_pwd = admin       <span class="comment">#frps监视页面的登陆密码</span></span><br><span class="line">vhost_http_port = 18080       <span class="comment">#http端口</span></span><br><span class="line">token = 123456                     <span class="comment">#frpc连接要对的暗号</span></span><br><span class="line">max_pool_count = 50</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改完成后保存执行以下命令生效（看好自己的路径哟）："><a href="#修改完成后保存执行以下命令生效（看好自己的路径哟）：" class="headerlink" title="修改完成后保存执行以下命令生效（看好自己的路径哟）："></a>修改完成后保存执行以下命令生效（看好自己的路径哟）：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/frp/frp/frps -c /root/frp/frp/frps.ini</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、自定义linux服务："><a href="#2、自定义linux服务：" class="headerlink" title="2、自定义linux服务："></a>2、自定义linux服务：</h2><h3 id="为了方便管理-以及可以开机自启我将frps自定义成了一个服务具体步骤如下："><a href="#为了方便管理-以及可以开机自启我将frps自定义成了一个服务具体步骤如下：" class="headerlink" title="为了方便管理 以及可以开机自启我将frps自定义成了一个服务具体步骤如下："></a>为了方便管理 以及可以开机自启我将frps自定义成了一个服务具体步骤如下：</h3><h3 id="首先写一个启动脚本frps-start-sh-执行刚才那条命令-应用frps-ini配置文件的设置-并将日志重定向到frps-startlog-txt"><a href="#首先写一个启动脚本frps-start-sh-执行刚才那条命令-应用frps-ini配置文件的设置-并将日志重定向到frps-startlog-txt" class="headerlink" title="首先写一个启动脚本frps_start.sh:(执行刚才那条命令 应用frps.ini配置文件的设置 并将日志重定向到frps_startlog.txt)"></a>首先写一个启动脚本<code>frps_start.sh</code>:(执行刚才那条命令 应用<code>frps.ini</code>配置文件的设置 并将日志重定向到<code>frps_startlog.txt</code>)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">PATH=/bin:/sbin:/usr/bin:/usr/sbin:~/bin</span><br><span class="line">sleep 30</span><br><span class="line">/root/frp/frp/frps -c /root/frp/frp/frps.ini &gt;&gt;/root/frp/frps_startlog.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="而后进入-usr-lib-systemd-system建立自定义服务文件frps-service"><a href="#而后进入-usr-lib-systemd-system建立自定义服务文件frps-service" class="headerlink" title="而后进入 /usr/lib/systemd/system建立自定义服务文件frps.service"></a>而后进入 /usr/lib/systemd/system建立自定义服务文件frps.service</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>  /usr/lib/systemd/system</span><br><span class="line">vim frps.service</span><br></pre></td></tr></table></figure>
-
-<h3 id="frps-service"><a href="#frps-service" class="headerlink" title="frps.service:"></a><code>frps.service</code>:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line"></span><br><span class="line">Description=frps</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"></span><br><span class="line">Type=oneshot</span><br><span class="line"></span><br><span class="line">ExecStart=/root/frp/frps_start.sh</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="执行-更新systemctl-daemon-reload"><a href="#执行-更新systemctl-daemon-reload" class="headerlink" title="执行 更新systemctl daemon-reload"></a>执行 更新<code>systemctl daemon-reload</code></h3><h3 id="而后启动服务systemctl-start-frps-service"><a href="#而后启动服务systemctl-start-frps-service" class="headerlink" title="而后启动服务systemctl start frps.service"></a>而后启动服务<code>systemctl start frps.service</code></h3><h3 id="开启自启systemctl-enable-frps-service"><a href="#开启自启systemctl-enable-frps-service" class="headerlink" title="开启自启systemctl enable frps.service"></a>开启自启<code>systemctl enable frps.service</code></h3><h4 id="等待服务启动后即可检查日志或是web监视页面"><a href="#等待服务启动后即可检查日志或是web监视页面" class="headerlink" title="等待服务启动后即可检查日志或是web监视页面"></a>等待服务启动后即可检查日志或是web监视页面</h4><h4 id="服务器ip-端口号："><a href="#服务器ip-端口号：" class="headerlink" title="服务器ip+端口号："></a>服务器ip+端口号：</h4>
-
-
-
-<h3 id="至此-frp-服务端配置成功"><a href="#至此-frp-服务端配置成功" class="headerlink" title="至此 frp 服务端配置成功"></a>至此 frp 服务端配置成功</h3><h2 id="3-客户端配置frpclient："><a href="#3-客户端配置frpclient：" class="headerlink" title="3.客户端配置frpclient："></a>3.客户端配置frpclient：</h2><h3 id="客户端配置的操作和服务端思路相同"><a href="#客户端配置的操作和服务端思路相同" class="headerlink" title="客户端配置的操作和服务端思路相同"></a>客户端配置的操作和服务端思路相同</h3><h3 id="以树莓派为例："><a href="#以树莓派为例：" class="headerlink" title="以树莓派为例："></a>以树莓派为例：</h3><h3 id="（1）首先是下载软件包"><a href="#（1）首先是下载软件包" class="headerlink" title="（1）首先是下载软件包"></a>（1）首先是下载软件包</h3><h3 id="通过-命令查看系统版本和系统位数"><a href="#通过-命令查看系统版本和系统位数" class="headerlink" title="通过  命令查看系统版本和系统位数"></a>通过  命令查看系统版本和系统位数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br><span class="line">getconf LONG_BIT</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="所以下载arm的软件包"><a href="#所以下载arm的软件包" class="headerlink" title="所以下载arm的软件包"></a>所以下载arm的软件包</h3>
-
-<h3 id="然后解压（方法和上边相同），然后进入目录"><a href="#然后解压（方法和上边相同），然后进入目录" class="headerlink" title="然后解压（方法和上边相同），然后进入目录"></a>然后解压（方法和上边相同），然后进入目录</h3>
-
-<h3 id="（2）在这里就需要修改frpc-ini这个配置文件了"><a href="#（2）在这里就需要修改frpc-ini这个配置文件了" class="headerlink" title="（2）在这里就需要修改frpc.ini这个配置文件了"></a>（2）在这里就需要修改frpc.ini这个配置文件了</h3>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vim frpc.ini </span><br><span class="line"></span><br><span class="line">[common] </span><br><span class="line">server_addr = xx.xx.xx.xx <span class="comment">#服务端的ip</span></span><br><span class="line">server_port = 65534       <span class="comment">#服务端的端口号</span></span><br><span class="line">token = 123456　　　　　　  <span class="comment">#暗号 哈哈哈哈不知道咋翻译 </span></span><br><span class="line"> </span><br><span class="line">[ssh] </span><br><span class="line"><span class="built_in">type</span> = tcp 　　　　　　     <span class="comment">#指定tcp协议</span></span><br><span class="line">local_ip = 127.0.0.1 　　  <span class="comment">#本地ip</span></span><br><span class="line">local_port = 22  　　　　　 <span class="comment">#端口号</span></span><br><span class="line">remote_port = 65532　　    <span class="comment">#穿透使用的端口号</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="然后是启动脚本："><a href="#然后是启动脚本：" class="headerlink" title="然后是启动脚本："></a>然后是启动脚本：</h3>
-
-<h3 id="然后到-usr-lib-systemd-system目录新建服务frpc-service文件"><a href="#然后到-usr-lib-systemd-system目录新建服务frpc-service文件" class="headerlink" title="然后到/usr/lib/systemd/system目录新建服务frpc.service文件"></a>然后到<code>/usr/lib/systemd/system</code>目录新建服务<code>frpc.service</code>文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/lib/systemd/system/</span><br><span class="line">root@raspberrypi:/usr/lib/systemd/system<span class="comment"># vim frpc.service </span></span><br><span class="line"></span><br><span class="line">[Unit] </span><br><span class="line"> </span><br><span class="line">Description=frpc </span><br><span class="line"> </span><br><span class="line">[Service] </span><br><span class="line"> </span><br><span class="line">Type=oneshot </span><br><span class="line"> </span><br><span class="line">ExecStart=/home/pi/frpc_start.sh </span><br><span class="line"> </span><br><span class="line">[Install] </span><br><span class="line"> </span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="启动服务-开机自启"><a href="#启动服务-开机自启" class="headerlink" title="启动服务  开机自启"></a>启动服务  开机自启</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start frpc.service</span><br><span class="line">systemctl <span class="built_in">enable</span> frpc.service</span><br></pre></td></tr></table></figure>
-
-<h3 id="而后等待启动成功后-即可去监视页面查看了"><a href="#而后等待启动成功后-即可去监视页面查看了" class="headerlink" title="而后等待启动成功后  即可去监视页面查看了"></a>而后等待启动成功后  即可去监视页面查看了</h3>
-
-<h4 id="如上图-可以看到当前已经存在的。。ssh了。"><a href="#如上图-可以看到当前已经存在的。。ssh了。" class="headerlink" title="如上图 可以看到当前已经存在的。。ssh了。"></a>如上图 可以看到当前已经存在的。。ssh了。</h4><h3 id="（3）测试"><a href="#（3）测试" class="headerlink" title="（3）测试"></a>（3）测试</h3><h4 id="下面进行测试"><a href="#下面进行测试" class="headerlink" title="下面进行测试"></a>下面进行测试</h4> 
-
-
-
-<h4 id="成功！！！！！"><a href="#成功！！！！！" class="headerlink" title="成功！！！！！"></a>成功！！！！！</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1206,13 +1161,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">84k</span>
+    <span title="站点总字数">85k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:17</span>
 </div>
 
         

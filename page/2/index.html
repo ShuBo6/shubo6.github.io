@@ -158,6 +158,144 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2021/07/12/%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/12/%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">重建二叉树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-12 02:04:34" itemprop="dateCreated datePublished" datetime="2021-07-12T02:04:34+08:00">2021-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="剑指-Offer-07-重建二叉树"><a href="#剑指-Offer-07-重建二叉树" class="headerlink" title="剑指 Offer 07. 重建二叉树"></a>剑指 Offer 07. 重建二叉树</h1><p>输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
+<p>例如，给出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前序遍历 preorder = [3,9,20,15,7]</span><br><span class="line">中序遍历 inorder = [9,3,15,20,7]</span><br></pre></td></tr></table></figure>
+
+<p>返回如下二叉树：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>根据preorder和inorder重建二叉树。</p>
+<pre><code>已知：
+
+前序pre ：根、左、右。
+中序in  ：左、根、右。
+</code></pre>
+<p>每一次的递推传递的参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rootIndex</td>
+<td>根节点的前序索引</td>
+</tr>
+<tr>
+<td>left</td>
+<td>中序数组中的左边界</td>
+</tr>
+<tr>
+<td>right</td>
+<td>中序数组中的右边界</td>
+</tr>
+</tbody></table>
+<p>每次递推中如何确定二叉树？<br>首先将中序的数组及其索引保存到哈希表<code>&#123;inorder[index],index&#125;</code>，减少后续的读取时间。</p>
+<p>1.递归的结束条件：left&gt;right    左边界大于右边界则说明越过了叶子结点，即返回空。</p>
+<p>2.如果当前没有越过叶子结点，则<code>root = new TreeNode(preorder[rootIndex])</code>就是当前的结点，</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>根节点索引</th>
+<th>中序左边界</th>
+<th>中序右边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>左子树</td>
+<td>rootIndex+1</td>
+<td>left</td>
+<td>index-1</td>
+</tr>
+<tr>
+<td>右子树</td>
+<td>rootIndex+index-left+1</td>
+<td>index+1</td>
+<td>right</td>
+</tr>
+</tbody></table>
+<p>3.返回<code>root</code>。</p>
+<h2 id="代码（Java）"><a href="#代码（Java）" class="headerlink" title="代码（Java）"></a>代码（Java）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] preorder;</span><br><span class="line">    HashMap&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span> [] pre,<span class="keyword">int</span> [] in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pre.length==<span class="number">0</span>||in.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        preorder=pre;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;in.length;i++)&#123;</span><br><span class="line">            map.put(in[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> reBuild(<span class="number">0</span>,<span class="number">0</span>,in.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">reBuild</span><span class="params">(<span class="keyword">int</span> rootIndex,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left&gt;right)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> inorderIndex=map.get(preorder[rootIndex]);</span><br><span class="line">        </span><br><span class="line">        TreeNode root=<span class="keyword">new</span> TreeNode(preorder[rootIndex]);</span><br><span class="line">        </span><br><span class="line">        root.left=reBuild(rootIndex+<span class="number">1</span>,left,inorderIndex-<span class="number">1</span>);</span><br><span class="line">        root.right=reBuild(rootIndex+inorderIndex-left+<span class="number">1</span>,inorderIndex+<span class="number">1</span>,right);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/10/21/%E5%8E%9F%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E5%92%8C%E7%A7%BB%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1093,96 +1231,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2019/09/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8%E7%A7%BB%E5%8A%A8%E7%83%AD%E7%82%B9%E8%BF%9E%E6%8E%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8%E7%A7%BB%E5%8A%A8%E7%83%AD%E7%82%B9%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">树莓派使用移动热点连接</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-09-08 02:09:42" itemprop="dateCreated datePublished" datetime="2019-09-08T02:09:42+08:00">2019-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>456</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>故事是这样的，在宿舍里，没带路由器，也没带网线。</p>
-<p>但是开学前觉得树莓派在家放着吃灰，就装书包里了。</p>
-<p>偏偏最近想要用树莓派在连接学校的校园网然后配合小米wifi当个热点机用。</p>
-<p>于是开始了试探性的折腾。</p>
-<h2 id="开启SSH"><a href="#开启SSH" class="headerlink" title="开启SSH"></a>开启SSH</h2><p>树莓派当前版本的系统默认ssh是关闭的。开启方法也很简单：</p>
-<blockquote>
-<p>  使用读卡器进入树莓派的<code>BOOT</code>分区，然后创建一个名为<code>SSH</code>的文件，即可默认开启SSH。(可以添加多个)</p>
-</blockquote>
-<h2 id="配置开启自动连接热点"><a href="#配置开启自动连接热点" class="headerlink" title="配置开启自动连接热点"></a>配置开启自动连接热点</h2><p><code>wpa_supplicant.conf:</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">country=GB</span><br><span class="line"></span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line"></span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line"></span><br><span class="line">ssid=”将我替换成Wi-Fi名”</span><br><span class="line"></span><br><span class="line">psk=”将我替换成Wi-Fi密码”</span><br><span class="line"></span><br><span class="line">priority=将我替换成数字，数字越大代表优先级越高</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="然后就可以将内存卡插入树莓派上电开机啦。。。"><a href="#然后就可以将内存卡插入树莓派上电开机啦。。。" class="headerlink" title="然后就可以将内存卡插入树莓派上电开机啦。。。"></a>然后就可以将内存卡插入树莓派上电开机啦。。。</h3><p>如图（我直接将小米WIFI也插到usb上了，免驱，所以显示两个连接。）</p>
-<img src="/2019/09/08/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8%E7%A7%BB%E5%8A%A8%E7%83%AD%E7%82%B9%E8%BF%9E%E6%8E%A5/1.png" class="">
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1290,13 +1338,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">84k</span>
+    <span title="站点总字数">85k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:17</span>
 </div>
 
         
