@@ -158,6 +158,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2021/07/12/%E5%88%A4%E6%96%AD%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="shubo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shubo的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/12/%E5%88%A4%E6%96%AD%E6%A0%91%E7%9A%84%E5%AD%90%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">判断树的子结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-12 08:45:25" itemprop="dateCreated datePublished" datetime="2021-07-12T08:45:25+08:00">2021-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>879</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="剑指-Offer-26-树的子结构"><a href="#剑指-Offer-26-树的子结构" class="headerlink" title="剑指 Offer 26. 树的子结构"></a>剑指 Offer 26. 树的子结构</h1><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)</p>
+<p>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
+<p>例如:<br>给定的树 A:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    3</span><br><span class="line">   / \</span><br><span class="line">  4   5</span><br><span class="line"> / \</span><br><span class="line">1   2</span><br></pre></td></tr></table></figure>
+<p>给定的树 B：<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  4 </span><br><span class="line"> /</span><br><span class="line">1</span><br></pre></td></tr></table></figure><br>返回 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+<p>因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
+<p>示例 1：</p>
+<p>输入：<code>A = [1,2,3], B = [3,1]</code><br>输出：<code>false</code><br>示例 2：</p>
+<p>输入：<code>A = [3,4,5,1,2], B = [4,1]</code><br>输出：<code>true</code></p>
+<p>限制：</p>
+<p>0 &lt;= 节点个数 &lt;= 10000</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>判断B是否是A的子树，我们将这个问题分为两部分：</p>
+<pre><code>树A的根节点记作A;
+树B的根节点记作B;
+1.在A树中找一个节点与B树根节点相同（前序遍历模板）
+2.对比后续的节点（前序遍历模板）
+</code></pre>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">HasSubtree</span><span class="params">(TreeNode root1, TreeNode root2)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//两个二叉树有一个为空则直接返回false</span></span><br><span class="line">        <span class="keyword">if</span>(root1==<span class="keyword">null</span>||root2==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> recur(root1,root2) || HasSubtree(root1.left,root2)||HasSubtree(root1.right,root2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">recur</span><span class="params">(TreeNode a,TreeNode b)</span></span>&#123;</span><br><span class="line">        <span class="comment">// b为空，就是完成了对B这个二叉树的遍历，就是找完了返回true</span></span><br><span class="line">        <span class="keyword">if</span>(b==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">// a为空说明越过a树的叶子结点，没匹配完，所以返回false</span></span><br><span class="line">        <span class="keyword">if</span>(a==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// a和b的节点值不相等，返回false</span></span><br><span class="line">        <span class="keyword">if</span>(b.val!=a.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 同时前序遍历a和b这两个树，递归匹配节点</span></span><br><span class="line">        <span class="keyword">return</span> recur(a.left,b.left) &amp;&amp; recur(a.right,b.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2021/07/12/%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -189,7 +285,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -327,7 +423,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -473,7 +569,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -593,7 +689,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -671,7 +767,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -763,7 +859,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -842,7 +938,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -938,7 +1034,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -1076,7 +1172,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
+                <time title="修改时间：2023-05-07 12:11:24" itemprop="dateModified" datetime="2023-05-07T12:11:24+08:00">2023-05-07</time>
               </span>
 
           <br>
@@ -1112,111 +1208,6 @@
 <h2 id="第二积分中值定理"><a href="#第二积分中值定理" class="headerlink" title="第二积分中值定理"></a>第二积分中值定理</h2><p>设$f(x)g(x)$在$[a,b]$上连续，且$g(x)$在$[a,b]$上恒号，则$\existξ\in [a,b]$使</p>
 <p>$$\int^b _af(x)g(x)dx=f(ξ)\int^b _ag(x)dx$$<br>第一中值定理就是第二中值定理的特例，$g(x)\equiv1$</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shubo6.github.io/2020/01/28/%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0%E6%B1%82%E6%9C%80%E5%80%BC%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="shubo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="shubo的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/28/%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0%E6%B1%82%E6%9C%80%E5%80%BC%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">二元函数求最值问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-28 13:21:30" itemprop="dateCreated datePublished" datetime="2020-01-28T13:21:30+08:00">2020-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-07 11:04:38" itemprop="dateModified" datetime="2023-05-07T11:04:38+08:00">2023-05-07</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>583</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="二元函数的极值"><a href="#二元函数的极值" class="headerlink" title="二元函数的极值"></a>二元函数的极值</h2><blockquote>
-<p>1.二元函数的极值一定在<code>驻点</code>和<code>不可导点</code>取得。对于不可导点，难以判断是否是是极值点，对于驻点可用极值的充分条件判定。</p>
-</blockquote>
-<blockquote>
-<p>2.二元函数取得极值的<code>必要条件</code>：设 $z = f(x,y)$ 在点 $(x_0,y_0)$ 处可微分而且在点 $(x_0,y_0)$ 处有极值，则 $f’_x(x_0,y_0)=0$ ,$f’_y(x_0,y_0)=0$ ,即 $(x_0,y_0)$ 是驻点。</p>
-</blockquote>
-<blockquote>
-<p>3.二元函数取得极值的<code>充分条件</code>：设 $z = f(x,y)$ 在$$(x_0,y_0)$$的某个领域内有连续的二阶偏导数，且 $$f’<em>x(x_0,y_0) = f’<em>y(x_0,y_0)=0$$ ,令$$f’</em>{xx}(x_0,y_0) = A$$,$$f’</em>{xy}(x_0,y_0) = B$$,$$f’_{yy}(x_0,y_0) = C$$ ,则</p>
-</blockquote>
-<blockquote>
-<p>当 $B^2-AC&lt;0$ 且 $A&lt;0$ 时，$f(x_0,y_0)$ 为极大值；</p>
-</blockquote>
-<blockquote>
-<p>当 $B^2-AC&lt;0$ 且 $A&gt;0$ 时，$f(x_0,y_0)$ 为极小值；</p>
-</blockquote>
-<blockquote>
-<p>当 $B^2-AC&gt;0$ 时，$(x_0,y_0)$ 不是极值点；</p>
-</blockquote>
-<blockquote>
-<p>当 $B^2-AC=0$ 时，函数 $z = f(x,y)$ 在点 $(x_0,y_0)$ 可能有极值，也可能没有极值，需另行讨论。</p>
-</blockquote>
-<hr>
-<p>今天是2020年 1月28日 不知不觉已经六十多天没有更新过这个东西了吧。。。</p>
-<p>闹瘟疫宅在家没事干，是时候动手写点东西了。</p>
-<img src="/2020/01/28/%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0%E6%B1%82%E6%9C%80%E5%80%BC%E9%97%AE%E9%A2%98/wyzy.png" class="" title="站住别动，我的眼睛长在脑袋的两边">
-
-<p>鼠年大吉，升本必胜！</p>
-<img src="/2020/01/28/%E4%BA%8C%E5%85%83%E5%87%BD%E6%95%B0%E6%B1%82%E6%9C%80%E5%80%BC%E9%97%AE%E9%A2%98/djs.png" class="">
       
     </div>
 
@@ -1344,7 +1335,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:17</span>
+    <span title="站点阅读时长">1:18</span>
 </div>
 
         
